@@ -48,5 +48,6 @@ app.use(router.routes(),router.allowedMethods())
 
 
 app.listen(10000);
+console.log('listen',10000)
 
 module.exports = app
