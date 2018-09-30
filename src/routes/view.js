@@ -5,4 +5,10 @@ const router = Router();
 
 router.get("/", View.Index);
 
+router.get("/operate", View.Operate);
+router.get("/operate/:id", View.Operate);
+
+router.get("/detail/:id", View.Index);
+
+
 module.exports = router;

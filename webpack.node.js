@@ -1,43 +1,27 @@
 const path = require("path");
+const fs = require("fs");
 const webpack = require("webpack");
-const externals = require('./externals')
 
 module.exports = {
     entry: {
-        index:[
-            '@babel/polyfill',
-            './src/server.js'
-        ],
+        app: `./app/browser.js`, //需要打包的文件
     },
+    target: 'node',
     output: {
         path: path.resolve(__dirname+'/dist'),
         filename: '[name].js'
     },
-    resolve: {
-        extensions: [".js"]
-    },
-    target: 'node',
-    externals,
-    context: __dirname,
-    target: 'node',
-    node: {
-        console: true,
-        global: true,
-        process: true,
-        Buffer: true,
-        __filename: true,
-        __dirname: true,
-        setImmediate: true,
-        path: true
-    },
+    devtool: 'inline-source-map',
     module: {
         rules: [
             {
                 test: /\.js[x]?$/,
+                // exclude:/node_modules/,
                 loader: 'babel-loader',
-                options: {
-                    presets: ['@babel/preset-env',"@babel/preset-react"]
-                }
+            },
+            {
+                test: /\.(css|scss)/,
+                use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader']
             }
         ]
     },

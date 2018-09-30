@@ -1,0 +1,36 @@
+@import '../../base.scss';
+@import '../../Component/Header/Header.scss';
+
+#operate {
+    max-width: 750px;
+    margin: auto;
+
+    > .title {
+        margin: 20px 0;
+        display: flex;
+
+        input {
+            margin-left: 20px;
+            text-indent: 5px;
+            flex: 1;
+            outline: 0;
+            border: 1px solid #ddd;
+        }
+    }
+
+    .quill {
+        margin-bottom: 20px;
+
+        .ql-container {
+            height: 500px;
+        }
+    }
+
+    .publish {
+        text-decoration: none;
+        color: #fff;
+        background-color: #0001ee;
+        border-radius: 5px;
+        padding: 2px 5px;
+    }
+}
