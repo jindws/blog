@@ -12,6 +12,11 @@ module.exports = {
         filename: '[name].js'
     },
     devtool: 'inline-source-map',
+    externals:{
+        react: 'React',
+		'react-dom': 'ReactDOM',
+		'react-router-dom': 'ReactRouterDOM',
+    },
     module: {
         rules: [
             {
