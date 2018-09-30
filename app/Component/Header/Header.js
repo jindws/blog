@@ -15,7 +15,7 @@ export default class Header extends PureComponent{
                 >
                 <embed
                     onClick={this._back.bind(this)}
-                    src="../Svg/left-circle.svg"
+                    src="/app/Component/Svg/left-circle.svg"
                     type="image/svg+xml"
                     pluginspage="http://www.adobe.com/svg/viewer/install/" />
                     <a href="javascript:;" onClick={this._back.bind(this)}></a>
