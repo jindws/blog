@@ -1,4 +1,4 @@
-module.exports =  ({ body='', script=[],title }) => {
+module.exports =  ({ body='',title }) => {
     return `<!DOCTYPE html>
       <html>
         <head>
@@ -12,10 +12,10 @@ module.exports =  ({ body='', script=[],title }) => {
         <body>
           <div id="root">${body}</div>
         </body>
-        <script src="https://cdn.bootcss.com/react/16.4.0/umd/react.production.min.js"></script>
-        <script src="https://cdn.bootcss.com/react-dom/16.4.0/umd/react-dom.production.min.js"></script>
-        <script src="https://cdn.bootcss.com/react-router-dom/4.2.2/react-router-dom.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.4.0/umd/react.production.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.4.0/umd/react-dom.production.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react-router-dom/4.2.2/react-router-dom.min.js"></script>
         <script type="text/javascript" src="/dist/app.js" charset="utf-8"></script>
-        <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" rel="stylesheet">
       </html>`
 };

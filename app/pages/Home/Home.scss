@@ -20,6 +20,11 @@
         justify-content: center;
     }
 }
+@media only screen and (max-width: 900px) {
+    header {
+        height: 40vh !important;
+    }
+}
 
 .section {
     dl {
@@ -54,6 +59,7 @@
 
         .content {
             display: flex;
+            word-break: break-all;
         }
 
         .time {
