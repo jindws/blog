@@ -10,8 +10,6 @@ const Index = ctx => {
     let body = renderToString(
         <StaticRouter
             location={ctx.request.url}
-            // location={{ pathname: '/detail/1' }}
-            // basename="/calendar"
             context={context}>
           <App path = {ctx.request.url}/>
         </StaticRouter>
