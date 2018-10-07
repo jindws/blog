@@ -4,16 +4,31 @@ const {
 
 const Create = async ctx=>{
     let {body} = ctx.request
-    const {
+    let {
         title,
         content='',
+        type=[]
     } = body
     if(!title){
         ctx.body = getResponse(false,'e001')
         return
     }
-    await modal.Article.create([title,content,Date.now()])
+
+    type = [...new Set(type.map(it=>it.trim()))]
+    await modal.Article.create([title,content,type.join()])
     ctx.body = getResponse(true,'操作成功')
+
+    CType(type)
+}
+
+const CType = async type=>{
+    let typelist = await modal.Type.list()
+    typelist = typelist.map(itm=>itm.name)
+    for (let it of type) {
+        if(!typelist.includes(type)){
+            await modal.Type.create([it])
+        }
+    }
 }
 
 const Detail = async ctx=>{
@@ -50,17 +65,20 @@ const List = async ctx=>{
 
 const Update = async ctx=>{
     let {body} = ctx.request
-    const {
+    let {
         id,
         title,
         content='',
+        type=[],
     } = body
     if(!title||!id){
         ctx.body = getResponse(false,'e001')
         return
     }
-    await modal.Article.update([title,content,id])
+    type = [...new Set(type.map(it=>it.trim()))]
+    await modal.Article.update([title,content,type,id])
     ctx.body = getResponse(true,'操作成功')
+    CType(type)
 }
 
 module.exports = {

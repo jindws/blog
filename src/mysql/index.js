@@ -29,6 +29,8 @@ global.query =(sql, values)=> {
 global.createTable = ( sql )=> query( sql, [] )
 
 const Article = require('./article')
+const Type = require('./type')
 module.exports = {
     Article,
+    Type,
 }

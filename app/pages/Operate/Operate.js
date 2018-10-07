@@ -3,10 +3,19 @@ import {render} from 'react-dom'
 import ReactQuill from 'react-quill'
 import Header from '../../Component/Header'
 import DB from '../../DB'
+import { Button,Select} from 'antd'
+
+const {Option} = Select
 
 class Operate extends React.PureComponent {
     constructor(props) {
         super(props)
+        const children = [];
+
+        for (let itm of typelist.split(',')) {
+            children.push(<Option key={itm}>{itm}</Option>);
+        }
+
         this.state = {
             content: '',
             title: '',
@@ -19,6 +28,8 @@ class Operate extends React.PureComponent {
                 ['blockquote','clean']
               ],
             },
+            type:[],
+            children,
         }
     }
 
@@ -27,12 +38,13 @@ class Operate extends React.PureComponent {
     }
 
     _operate(){
-        const {title,content} = this.state
+        const {title,content,type} = this.state
         if(defaultid){
             DB.Article.Update({
                 id:defaultid,
                 title,
                 content,
+                type,
             }).then(data=>{
 
             },({errorMsg})=>{
@@ -44,8 +56,8 @@ class Operate extends React.PureComponent {
         DB.Article.Create({
             title,
             content,
+            type,
         }).then(data=>{
-            // location.replace('/operate/'+)
             location.replace('/')
         },({errorMsg})=>{
             console.log(errorMsg)
@@ -64,11 +76,8 @@ class Operate extends React.PureComponent {
     }
 
     render() {
-        const {title, content,modules} = this.state
+        const {title, content,modules,children} = this.state
 
-        console.log(content)
-
-        // console.log('&lt;p&gt;&lt;strong&gt;123123123&lt;/strong&gt;&lt;/p&gt;')
 
         return [
             <Header key='header'/>,
@@ -82,7 +91,22 @@ class Operate extends React.PureComponent {
                 <ReactQuill
                     modules={modules}
                     value={content} onChange={this.handleChange.bind(this)}/>
-                <a className='publish' href='javascript:;' onClick={this._operate.bind(this)}>发布</a>
+                {/* <a className='publish' href='javascript:;' >发布</a> */}
+                <Select
+                    mode="tags"
+                    style={{ width: '30%',marginRight:'10%' }}
+                    placeholder="添加分类"
+                    onChange={type=>{
+                        this.setState({
+                            type
+                        })
+                    }}
+                  >
+                    {children}
+              </Select>
+                <Button
+                    type="primary"
+                    onClick={this._operate.bind(this)}>发布</Button>
             </section>
         ]
     }

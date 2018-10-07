@@ -5,5 +5,9 @@
   ],
   "plugins": [
       "@babel/plugin-transform-runtime",
+      ["import", {
+        "libraryName": "antd",
+        "style": false,
+      }]
   ]
 }

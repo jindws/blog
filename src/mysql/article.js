@@ -3,6 +3,7 @@ let modal =
      id INT NOT NULL AUTO_INCREMENT,
      title VARCHAR(100) NOT NULL,
      content VARCHAR(5000) NOT NULL,
+     type VARCHAR(100),
      create_time DOUBLE NOT NULL,
      is_delete BOOLEAN DEFAULT FALSE,
      PRIMARY KEY ( id )
@@ -12,7 +13,7 @@ createTable(modal)
 
 // 发表文章
 let create = value => {
-  let _sql = "insert into article set title=?,content=?,create_time=?;"
+  let _sql = `insert into article set title=?,content=?,type=?,create_time=${Date.now()};`
   return query( _sql, value )
 }
 
@@ -29,7 +30,7 @@ let list = value=>{
 }
 
 let update = value=>{
-    let _sql = "update article set title=?,content=? where id = ?";
+    let _sql = "update article set title=?,content=?,type=? where id = ?";
     return query( _sql, value )
 }
 

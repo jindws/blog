@@ -7,6 +7,7 @@ module.exports =  ({ body='',title }) => {
             <meta http-equiv="X-UA-Compatible" content="ie=edge">
             <title>${title}</title>
             <script type="text/javascript" src="/dist/css.js" charset="utf-8"></script>
+            <link href="https://cdnjs.cloudflare.com/ajax/libs/antd/3.10.0/antd.min.css" rel="stylesheet">
         </head>
 
         <body>

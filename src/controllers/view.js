@@ -32,9 +32,12 @@ const Operate = async ctx=>{
     // }
     //
     // console.log(detail[0].content)
+    const list = await modal.Type.list()
+    console.log(list.map(itm=>itm.name))
     await ctx.render('operate',{
         // detail:detail[0],
         id,
+        typelist:list.map(itm=>itm.name),
     })
 }
 
