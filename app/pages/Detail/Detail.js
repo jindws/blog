@@ -33,7 +33,7 @@ class Detail extends React.PureComponent {
     }
 
     render() {
-        const {title,content,create_time} = this.state
+        const {title,content,create_time,id} = this.state
         return [
             <Header key='header'/>,
             <section key='detail' id='detail'>
@@ -42,7 +42,9 @@ class Detail extends React.PureComponent {
                     <div className='content'
                         dangerouslySetInnerHTML = {{ __html: content}}
                     />
-                </section>
+                    <a href={`/operate/${id}`}>编辑</a>
+            </section>,
+
         ]
     }
 }

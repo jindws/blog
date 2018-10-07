@@ -8,8 +8,17 @@ class Operate extends React.PureComponent {
     constructor(props) {
         super(props)
         this.state = {
-            content: defaultcontent,
-            title: defaulttitle,
+            content: '',
+            title: '',
+            modules: {
+              toolbar: [
+                [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+                [ 'bold', 'italic', 'underline','strike', {color:[]},{background:[]}],
+                [{align:[]},{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
+                ['link', 'image','video',{script:'sub'},{script:'super'}],
+                ['blockquote','clean']
+              ],
+            },
         }
     }
 
@@ -43,8 +52,23 @@ class Operate extends React.PureComponent {
         })
     }
 
+    componentDidMount(){
+        if(defaultid){
+            DB.Article.Detail({
+                id:defaultid
+            }).then(data=>{
+                console.log(data)
+                this.setState(data)
+            })
+        }
+    }
+
     render() {
-        const {title, content} = this.state
+        const {title, content,modules} = this.state
+
+        console.log(content)
+
+        // console.log('&lt;p&gt;&lt;strong&gt;123123123&lt;/strong&gt;&lt;/p&gt;')
 
         return [
             <Header key='header'/>,
@@ -55,7 +79,9 @@ class Operate extends React.PureComponent {
                             this.setState({title: target.value})
                         }} placeholder='请输入标题' value={title}/>
                 </div>
-                <ReactQuill value={content} onChange={this.handleChange.bind(this)}/>
+                <ReactQuill
+                    modules={modules}
+                    value={content} onChange={this.handleChange.bind(this)}/>
                 <a className='publish' href='javascript:;' onClick={this._operate.bind(this)}>发布</a>
             </section>
         ]

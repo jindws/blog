@@ -12,6 +12,7 @@ module.exports = {
         react: 'React',
 		'react-dom': 'ReactDOM',
 		'react-router-dom': 'ReactRouterDOM',
+        // 'react-markdown': 'ReactMarkdown',
     },
     module: {
         rules: [

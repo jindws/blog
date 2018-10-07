@@ -23,15 +23,17 @@ const Index = ctx => {
 
 const Operate = async ctx=>{
     const {id=''} = ctx.params
-    let detail=[{
-        title:'',
-        content:'',
-    }]
-    if(id){
-        detail = await modal.Article.detail([id])
-    }
+    // let detail=[{
+    //     title:'',
+    //     content:'',
+    // }]
+    // if(id){
+    //     detail = await modal.Article.detail([id])
+    // }
+    //
+    // console.log(detail[0].content)
     await ctx.render('operate',{
-        detail:detail[0],
+        // detail:detail[0],
         id,
     })
 }
