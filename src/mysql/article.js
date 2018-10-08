@@ -19,7 +19,7 @@ let create = value => {
 
 //查看文章详情
 let detail = value=>{
-    let _sql = "select title,content,create_time from article where id = ?;"
+    let _sql = "select title,content,create_time,type from article where id = ?;"
     return query( _sql, value )
 }
 

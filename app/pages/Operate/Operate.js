@@ -3,7 +3,7 @@ import {render} from 'react-dom'
 import ReactQuill from 'react-quill'
 import Header from '../../Component/Header'
 import DB from '../../DB'
-import { Button,Select} from 'antd'
+import { Button,Select,message} from 'antd'
 
 const {Option} = Select
 
@@ -46,9 +46,9 @@ class Operate extends React.PureComponent {
                 content,
                 type,
             }).then(data=>{
-
+                message.success('修改成功');
             },({errorMsg})=>{
-                console.log(errorMsg)
+                message.error(errorMsg);
             })
             return
         }
@@ -58,9 +58,10 @@ class Operate extends React.PureComponent {
             content,
             type,
         }).then(data=>{
+            message.success('操作成功');
             location.replace('/')
         },({errorMsg})=>{
-            console.log(errorMsg)
+            message.error(errorMsg);
         })
     }
 
@@ -68,17 +69,17 @@ class Operate extends React.PureComponent {
         if(defaultid){
             DB.Article.Detail({
                 id:defaultid
-            }).then(data=>{
-                console.log(data)
-                this.setState(data)
+            }).then(({type,...data})=>{
+                this.setState({
+                    ...data,
+                    type:type.split(','),
+                })
             })
         }
     }
 
     render() {
-        const {title, content,modules,children} = this.state
-
-
+        const {title, content,modules,children,type} = this.state
         return [
             <Header key='header'/>,
             <section id="operate" key='operate'>
@@ -96,6 +97,7 @@ class Operate extends React.PureComponent {
                     mode="tags"
                     style={{ width: '30%',marginRight:'10%' }}
                     placeholder="添加分类"
+                    value={type}
                     onChange={type=>{
                         this.setState({
                             type

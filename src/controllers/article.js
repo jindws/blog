@@ -25,7 +25,7 @@ const CType = async type=>{
     let typelist = await modal.Type.list()
     typelist = typelist.map(itm=>itm.name)
     for (let it of type) {
-        if(!typelist.includes(type)){
+        if(!typelist.includes(it)){
             await modal.Type.create([it])
         }
     }
