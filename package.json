@@ -1,6 +1,6 @@
 {
   "name": "blog",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -10,9 +10,9 @@
     "build:server": "webpack --mode development --progress --watch --config webpack.node.js",
     "build:css": "webpack --mode development --progress --watch --config webpack.scss.js",
     "build": "yarn start&yarn build:app&yarn build:server&yarn build:css",
-    "pro:app": "webpack --mode production --progress",
-    "pro:server": "webpack --mode production --progress --config webpack.node.js",
-    "pro:css": "webpack --mode production --progress --config webpack.scss.js",
+    "pro:app": "webpack --mode production",
+    "pro:server": "webpack --mode production --config webpack.node.js",
+    "pro:css": "webpack --mode production --config webpack.scss.js",
     "pro": "yarn pro:app&&yarn pro:server&&yarn pro:css",
     "pm2": "pm2 start index.js",
     "pm2:log": "pm2 logs",
