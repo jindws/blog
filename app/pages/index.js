@@ -5,6 +5,7 @@ import { BackTop } from 'antd'
 
 import Home from './Home'
 import Detail from './Detail'
+import Login from './Login'
 
 class App extends React.PureComponent{
     constructor(props){
@@ -28,6 +29,7 @@ class App extends React.PureComponent{
                 <div>
                     <Switch>
                         <Route exact path="/" component={Home} />
+                        <Route exact path="/login" component={Login} />
                         <Route exact path="/detail/:id" component={Detail} />
                     </Switch>
                     </div>

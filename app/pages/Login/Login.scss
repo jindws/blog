@@ -1,0 +1,21 @@
+#login {
+    max-width: 400px;
+    width: 90%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 80vh;
+
+    .btn {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        width: 100%;
+    }
+
+    .ant-input-group-wrapper {
+        margin-bottom: 20px;
+    }
+}

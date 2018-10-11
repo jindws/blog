@@ -1,10 +1,11 @@
-import React from "react"
+import React,{PureComponent} from "react"
 import {Link} from 'react-router-dom'
 import DB from '../../DB'
 import moment from 'moment'
 import Header from '../../Component/Header'
+import {Tag,Button,message} from 'antd'
 
-class Detail extends React.PureComponent {
+class Detail extends PureComponent {
 
     constructor(props){
         super(props)
@@ -14,6 +15,8 @@ class Detail extends React.PureComponent {
             title:'',
             content:'',
             create_time:null,
+            type:'',
+            author:false,
         }
     }
 
@@ -21,28 +24,29 @@ class Detail extends React.PureComponent {
         const {id} = this.state
         DB.Article.Detail({
             id,
-        }).then(({title,content,create_time})=>{
-            this.setState({
-                title,
-                content,
-                create_time,
-            })
+        }).then((data)=>{
+            this.setState(data)
         },({errorMsg})=>{
-            console.log(errorMsg)
+            message.error(errorMsg)
         })
     }
 
     render() {
-        const {title,content,create_time,id} = this.state
+        const {title,content,create_time,id,type,author} = this.state
         return [
             <Header key='header'/>,
             <section key='detail' id='detail'>
-                    <header>{title}</header>
-                    <time>{create_time&&moment(create_time).format('YYYY-MM-DD HH:mm:ss')}</time>
-                    <div className='content'
-                        dangerouslySetInnerHTML = {{ __html: content}}
-                    />
-                    <a href={`/operate/${id}`}>编辑</a>
+                <header>{title}</header>
+                {
+                    type.split(',').map(it=><Tag>{it}</Tag>)
+                }
+                <time>{create_time&&moment(create_time).format('YYYY-MM-DD HH:mm:ss')}</time>
+                <div className='content'
+                    dangerouslySetInnerHTML = {{ __html: content}}
+                />
+                <a href={`/operate/${id}`}
+                style={{display:(author?'':'none')}}
+                ><Button shape="circle" icon="edit" /></a>
             </section>,
 
         ]

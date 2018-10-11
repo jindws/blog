@@ -10,5 +10,7 @@ router.get("/operate/:id", View.Operate);
 
 router.get("/detail/:id", View.Index);
 
+router.get("/login", View.Index);
+
 
 module.exports = router;

@@ -1,5 +1,7 @@
 const Router = require("koa-router");
 const Article = require("../controllers/article");
+const {checkLogin,ifarticleauthor} = require("../helpers/auth");
+
 
 const router = Router({
     prefix:'/api/article'
@@ -14,7 +16,7 @@ const router = Router({
     content:String,
 }
  */
-router.post("/create", Article.Create);
+router.post("/create",checkLogin, Article.Create);
 
 
 /**
@@ -26,7 +28,7 @@ router.post("/create", Article.Create);
     content:String,
 }
  */
-router.post("/update", Article.Update);
+router.post("/update", checkLogin,ifarticleauthor,Article.Update);
 
 /**
  * @desc 文章详情

@@ -1,4 +1,4 @@
-import React from "react"
+import React,{PureComponent} from "react"
 import {render} from 'react-dom'
 import ReactQuill from 'react-quill'
 import Header from '../../Component/Header'
@@ -7,7 +7,7 @@ import { Button,Select,message} from 'antd'
 
 const {Option} = Select
 
-class Operate extends React.PureComponent {
+class Operate extends PureComponent {
     constructor(props) {
         super(props)
         const children = [];

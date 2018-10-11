@@ -14,6 +14,9 @@ app.use(logger())
 app.use(serve('.'));
 
 const config = require('./config');
+
+
+
 // session存储配置
 const sessionMysqlConfig = {
   user: config.database.USERNAME,
@@ -26,6 +29,12 @@ const sessionMysqlConfig = {
 app.use(session({
   store: new MysqlStore(sessionMysqlConfig)
 }))
+
+const {
+    SessStoreUser,
+} = require('./helpers');
+
+app.use(SessStoreUser)
 
 app.use(views('' , {
   map: {

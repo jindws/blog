@@ -2,15 +2,14 @@ const Router = require("koa-router");
 
 const view = require("./view");
 const article = require("./article");
+const admin = require("./admin");
 
-const router = Router({
-	// prefix:'/api',
-});
-
+const router = Router();
 
 const routes = [
 	view,
 	article,
+	admin,
 ];
 
 for (let route of routes) {

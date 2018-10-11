@@ -15,7 +15,14 @@ const Create = async ctx=>{
     }
 
     type = [...new Set(type.map(it=>it.trim()))]
-    await modal.Article.create([title,content,type.join()])
+    const {admin} = ctx.state
+    console.log(11,admin)
+    await modal.Article.create([
+        title,
+        content,
+        type.join(),
+        admin.id,
+    ])
     ctx.body = getResponse(true,'操作成功')
 
     CType(type)
@@ -40,12 +47,24 @@ const Detail = async ctx=>{
         ctx.body = getResponse(false,'e001')
         return
     }
-    const detail = await modal.Article.detail([id])
+    let detail = await modal.Article.detail([id])
     if(!detail[0]){
         ctx.body = getResponse(false,'e002')
         return
     }
-    ctx.body = getResponse(true,detail[0])
+
+    detail = detail[0]
+
+    const {admin={}} = ctx.state
+
+    const {create_user_id} = detail
+
+    const author = detail.create_user_id&&detail.create_user_id === admin.id
+
+    ctx.body = getResponse(true,{
+        ...detail,
+        author,
+    })
 }
 
 const List = async ctx=>{
@@ -75,6 +94,7 @@ const Update = async ctx=>{
         ctx.body = getResponse(false,'e001')
         return
     }
+
     type = [...new Set(type.map(it=>it.trim()))]
     await modal.Article.update([title,content,type,id])
     ctx.body = getResponse(true,'操作成功')

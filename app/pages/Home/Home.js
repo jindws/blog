@@ -2,6 +2,8 @@ import React from "react"
 import {Link} from 'react-router-dom'
 import DB from '../../DB'
 import moment from 'moment'
+import {Tag,message} from 'antd'
+
 
 class Home extends React.PureComponent {
 
@@ -25,7 +27,7 @@ class Home extends React.PureComponent {
                 list,
             })
         },({errorMsg})=>{
-            console.log(errorMsg)
+            message.error(errorMsg)
         })
     }
 
@@ -42,13 +44,18 @@ class Home extends React.PureComponent {
                     list.map(itm=>{
                         return <dl key={itm.id}>
                             <dt>
-                                {/* <Link to={`/detail/${itm.id}`}>{itm.title}</Link> */}
                                 <a href={`/detail/${itm.id}`}>{itm.title}</a>
                             </dt>
                             <dd className='content'
                                 dangerouslySetInnerHTML = {{ __html: itm.content||'暂无预览'}}
                             />
-                            <dd className='time'>{moment(itm.create_time).format('YYYY-MM-DD HH:mm:ss')}</dd>
+
+                            <dd className='time'>
+                                {
+                                    itm.type.split(',').map(it=><Tag>{it}</Tag>)
+                                }
+                                {moment(itm.create_time).format('YYYY-MM-DD HH:mm:ss')}
+                            </dd>
                         </dl>
                     })
                 }

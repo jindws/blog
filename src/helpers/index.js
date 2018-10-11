@@ -39,3 +39,16 @@ exports.getAcessRealIP = (req) => {
         req.socket.remoteAddress ||
         req.connection.socket.remoteAddress
 }
+
+exports.SessStoreUser = async (ctx,next)=>{
+    const {id} = ctx.session.admin||{}
+    let admin=[]
+    if(id){
+        admin = await modal.Admin.detail([id])
+    }
+    ctx.state = {
+        admin:admin[0],
+        islogin:!!admin,
+    }
+    await next()
+}

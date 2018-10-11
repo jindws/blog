@@ -20,3 +20,10 @@ DBF.create('Article', {
         method    : 'POST',
     }
 });
+
+DBF.create('Admin', {
+    Login:{
+        url       : '/api/admin/login',
+        method    : 'POST',
+    }
+});
