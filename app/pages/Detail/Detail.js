@@ -35,13 +35,13 @@ class Detail extends PureComponent {
         const {title,content,create_time,id,type,author} = this.state
         return [
             <Header key='header'/>,
-            <section key='detail' id='detail'>
+            <section key='detail' id='detail' className='ql-snow'>
                 <header>{title}</header>
                 {
                     type.split(',').map(it=><Tag>{it}</Tag>)
                 }
                 <time>{create_time&&moment(create_time).format('YYYY-MM-DD HH:mm:ss')}</time>
-                <div className='content'
+                <div className='content ql-editor'
                     dangerouslySetInnerHTML = {{ __html: content}}
                 />
                 <a href={`/operate/${id}`}

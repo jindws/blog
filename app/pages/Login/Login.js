@@ -17,7 +17,6 @@ class Login extends PureComponent {
             username,
             password:md5(password),
         }).then(()=>{
-            message.success('登录成功')
             location.replace('/')
         },({errorMsg})=>{
             message.error(errorMsg)
