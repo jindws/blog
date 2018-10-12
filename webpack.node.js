@@ -1,17 +1,17 @@
 const path = require("path");
-const fs = require("fs");
+// const fs = require("fs");
 const webpack = require("webpack");
 
 module.exports = {
     entry: {
         app: `./app/browser.js`, //需要打包的文件
     },
-    target: 'node',
+    // target: 'node',
     output: {
         path: path.resolve(__dirname+'/dist'),
         filename: '[name].js'
     },
-    devtool: 'inline-source-map',
+    // devtool: 'inline-source-map',
     externals:{
         react: 'React',
 		'react-dom': 'ReactDOM',

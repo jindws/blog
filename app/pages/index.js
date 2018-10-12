@@ -1,13 +1,12 @@
-import React from "react";
-import { StaticRouter,Router, Route, Link,Switch } from "react-router-dom";
-// import { createMemoryHistory } from 'history';
+import React,{PureComponent} from "react"
+import { StaticRouter,Router, Route, Link,Switch } from "react-router-dom"
 import { BackTop } from 'antd'
 
 import Home from './Home'
 import Detail from './Detail'
 import Login from './Login'
 
-class App extends React.PureComponent{
+class App extends PureComponent{
     constructor(props){
         super(props)
         let path = props.path

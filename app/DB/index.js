@@ -25,5 +25,9 @@ DBF.create('Admin', {
     Login:{
         url       : '/api/admin/login',
         method    : 'POST',
+    },
+    Create:{
+        url       : '/api/admin/create',
+        method    : 'POST',
     }
 });
