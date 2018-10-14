@@ -3,7 +3,6 @@ const {
 } = require('../helpers')
 
 exports.checkLogin = async(ctx,next) => {
-    console.log(ctx.session)
     if(!ctx.state.islogin){
         ctx.body = getResponse(false,'e201')
         return

@@ -48,7 +48,7 @@ exports.SessStoreUser = async (ctx,next)=>{
     }
     ctx.state = {
         admin:admin[0],
-        islogin:!!admin,
+        islogin:!!admin[0],
     }
     await next()
 }

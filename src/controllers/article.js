@@ -16,7 +16,6 @@ const Create = async ctx=>{
 
     type = [...new Set(type.map(it=>it.trim()))]
     const {admin} = ctx.state
-    console.log(11,admin)
     await modal.Article.create([
         title,
         content,
