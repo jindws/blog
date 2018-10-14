@@ -1,13 +1,32 @@
-import React,{PureComponent} from "react"
+import React,{Component} from "react"
 import {render} from 'react-dom'
 import ReactQuill from 'react-quill'
 import Header from '../../Component/Header'
 import DB from '../../DB'
-import { Button,Select,message} from 'antd'
+import { Button,Select,message,Input} from 'antd'
 
 const {Option} = Select
 
-class Operate extends PureComponent {
+import {observable,action} from 'mobx';
+import { observer } from "mobx-react"
+
+@observer class Operate extends Component {
+
+    modules = {
+      toolbar: [
+        [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+        [ 'bold', 'italic', 'underline','strike', {color:[]},{background:[]}],
+        [{align:[]},{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
+        ['link', 'image','video',{script:'sub'},{script:'super'}],
+        ['blockquote','clean']
+      ],
+    }
+
+    @observable content = ''
+    @observable title
+    @observable children
+    @observable type = []
+
     constructor(props) {
         super(props)
         const children = [];
@@ -16,29 +35,16 @@ class Operate extends PureComponent {
             children.push(<Option key={itm}>{itm}</Option>);
         }
 
-        this.state = {
-            content: '',
-            title: '',
-            modules: {
-              toolbar: [
-                [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-                [ 'bold', 'italic', 'underline','strike', {color:[]},{background:[]}],
-                [{align:[]},{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
-                ['link', 'image','video',{script:'sub'},{script:'super'}],
-                ['blockquote','clean']
-              ],
-            },
-            type:[],
-            children,
-        }
+        this.children = children
     }
 
-    handleChange(content) {
-        this.setState({content})
-    }
 
     _operate(){
-        const {title,content,type} = this.state
+        const {title,content,type} = this
+        if(!title||!content){
+            message.error('请输入标题或内容')
+            return
+        }
         if(defaultid){
             DB.Article.Update({
                 id:defaultid,
@@ -70,38 +76,37 @@ class Operate extends PureComponent {
             DB.Article.Detail({
                 id:defaultid
             }).then(({type,...data})=>{
-                this.setState({
-                    ...data,
-                    type:type.split(','),
-                })
+                this.type = type.split(',')
+                Object.assign(this,data)
             })
         }
     }
 
     render() {
-        const {title, content,modules,children,type} = this.state
+        const {title, content,modules,children,type} = this
         return [
             <Header key='header'/>,
             <section id="operate" key='operate'>
                 <div className='title'>
                     <label>标题</label>
-                    <input type="text" onChange={({target}) => {
-                            this.setState({title: target.value})
-                        }} placeholder='请输入标题' value={title}/>
+                        <Input
+                            placeholder='请输入标题'
+                            value={title}
+                            onChange={({target}) => {
+                                this.title = target.value
+                            }}
+                        />
                 </div>
                 <ReactQuill
                     modules={modules}
-                    value={content} onChange={this.handleChange.bind(this)}/>
-                {/* <a className='publish' href='javascript:;' >发布</a> */}
+                    value={content} onChange={content=>this.content = content}/>
                 <Select
                     mode="tags"
                     style={{ width: '30%',marginRight:'10%' }}
                     placeholder="添加分类"
                     value={type}
                     onChange={type=>{
-                        this.setState({
-                            type
-                        })
+                        this.type = type
                     }}
                   >
                     {children}

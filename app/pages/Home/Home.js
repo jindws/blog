@@ -1,38 +1,39 @@
-import React from "react"
+import React,{Component} from "react"
 import {Link} from 'react-router-dom'
 import DB from '../../DB'
 import moment from 'moment'
 import {Tag,message} from 'antd'
 
+import {observable,action} from 'mobx';
+import { observer } from "mobx-react"
 
-class Home extends React.PureComponent {
+@observer class Home extends Component {
+
+    @observable pageNum = 1
+    @observable list =[]
 
     constructor(){
         super()
-        this.state={
-            pageNum:1,
-            list:[],
-            count:0,
-        }
     }
 
     componentDidMount(){
-        const {pageNum} = this.state
+        this.getList()
+    }
+
+    getList(){
+        const {pageNum} = this
         DB.Article.List({
             pageSize:10,
             pageNum,
         }).then(({count,list})=>{
-            this.setState({
-                count,
-                list,
-            })
+            this.list = list
         },({errorMsg})=>{
             message.error(errorMsg)
         })
     }
 
     render() {
-        const {count,list} = this.state
+        const {list} = this
         return [
             <header key='header' className='header'>
                 <div className='animated fadeIn'>
@@ -52,7 +53,7 @@ class Home extends React.PureComponent {
 
                             <dd className='time'>
                                 {
-                                    itm.type.split(',').map(it=><Tag>{it}</Tag>)
+                                    itm.type&&itm.type.split(',').map(it=><Tag>{it}</Tag>)
                                 }
                                 {moment(itm.create_time).format('YYYY-MM-DD HH:mm:ss')}
                             </dd>

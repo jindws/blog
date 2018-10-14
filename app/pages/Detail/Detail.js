@@ -1,44 +1,44 @@
-import React,{PureComponent} from "react"
+import React,{Component} from "react"
 import {Link} from 'react-router-dom'
 import DB from '../../DB'
 import moment from 'moment'
 import Header from '../../Component/Header'
 import {Tag,Button,message} from 'antd'
 
-class Detail extends PureComponent {
+import {observable,action} from 'mobx';
+import { observer } from "mobx-react"
+
+@observer class Detail extends Component {
+
+    @observable title
+    @observable content
+    @observable create_time
+    @observable author
 
     constructor(props){
         super(props)
-        const {id} = props.match.params
-        this.state = {
-            id,
-            title:'',
-            content:'',
-            create_time:null,
-            type:'',
-            author:false,
-        }
+        this.id = props.match.params.id
     }
 
     componentDidMount(){
-        const {id} = this.state
+        const {id} = this
         DB.Article.Detail({
             id,
         }).then((data)=>{
-            this.setState(data)
+            Object.assign(this,data)
         },({errorMsg})=>{
             message.error(errorMsg)
         })
     }
 
     render() {
-        const {title,content,create_time,id,type,author} = this.state
+        const {title,content,create_time,id,type = '',author} = this
         return [
             <Header key='header'/>,
             <section key='detail' id='detail' className='ql-snow'>
                 <header>{title}</header>
                 {
-                    type.split(',').map(it=><Tag>{it}</Tag>)
+                    type&&type.split(',').map(it=><Tag>{it}</Tag>)
                 }
                 <time>{create_time&&moment(create_time).format('YYYY-MM-DD HH:mm:ss')}</time>
                 <div className='content ql-editor'
