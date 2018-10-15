@@ -7,43 +7,55 @@ import md5 from 'md5'
 import {observable,action} from 'mobx';
 import { observer } from "mobx-react"
 
-@observer
-class Login extends Component {
+const _data = observable({
+    // loading:false,
+    // username:'',
+    // password:'',
+    // repassword:'',
+    // type:0,
+})
 
-    @observable loading
-    @observable username
-    @observable password
-    @observable repassword
-    @observable type
+const _change = action((name,value)=>_data[name] = value)
+
+const _clear = action(type=>{
+    Object.assign(_data,{
+        type,
+        username:'',
+        password:'',
+        repassword:'',
+    })
+})
+
+@observer class Login extends Component {
 
     constructor(props){
         super(props)
     }
 
     _login(){
-        const {username,password,type} = this
+        const {username,password,type} = _data
         if(type){
-            return this._type(0)
+            return _clear(0)
         }
         if(!username||!password){
             return message.error('请输入用户名或密码')
         }
-        this.loading = true
+        _change('loading',true)
         DB.Admin.Login({
             username,
             password:md5(password),
         }).then(()=>{
             location.replace('/')
         },({errorMsg})=>{
-            this.loading = false
+            _change('loading',false)
             message.error(errorMsg)
         })
     }
 
     _regist(){
-        const {username,password,repassword,type} = this
+        const {username,password,repassword,type} = _data
         if(!type){
-            return this._type(1)
+            return _clear(1)
         }
         if(!username||!password){
             return message.error('请输入用户名或密码')
@@ -51,7 +63,7 @@ class Login extends Component {
         if(password!==repassword){
             return message.error('两次密码输入不一致')
         }
-        this.loading = true
+        _change('loading',true)
 
         DB.Admin.Create({
             username,
@@ -60,35 +72,29 @@ class Login extends Component {
             message.success('注册成功')
             setTimeout(()=>location.replace('/'),1000)
         },({errorMsg})=>{
-            this.loading = false
+            _change('loading',false)
             message.error(errorMsg)
         })
     }
 
-    _type(type){
-        this.type = type
-        this.username = ''
-        this.password = ''
-        this.repassword = ''
-    }
-
     render() {
-        const {username,password,repassword,type,loading} = this
+        const {username,password,repassword,type,loading} = _data
 
         return [
             <Header/>,
             <section id='login'>
+                <em>login</em>,
                 <Input addonBefore="用户名"
                     value={username}
                     onChange={({target})=>{
-                        this.username = target.value
+                        _change('username',target.value)
                     }}
                     placeholder='请输入用户名'/>
                 <Input addonBefore="密&nbsp;&nbsp;&nbsp;码"
                     type='password'
                     value={password}
                     onChange={({target})=>{
-                        this.password = target.value
+                        _change('password',target.value)
                     }}
                     placeholder='请输入密码'/>
                 <Input
@@ -96,7 +102,8 @@ class Login extends Component {
                     type='password'
                     value={repassword}
                     onChange={({target})=>{
-                        this.repassword = target.value
+                        _change('repassword',target.value)
+
                     }}
                     style={{
                         display:(type?'':'none')

@@ -3,7 +3,6 @@ import React, {PureComponent} from "react"
 export default class Header extends PureComponent{
 
     _back(){
-        // history.go(-1)
         location.replace('/')
     }
 

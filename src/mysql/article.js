@@ -26,7 +26,7 @@ let detail = value=>{
 
 //文章列表
 let list = value=>{
-    let _sql = "select id,title,content,create_time,type from article order by create_time desc limit ?,?;"
+    let _sql = "select id,title,content,create_time,type from article where is_delete=false order by create_time desc limit ?,?;"
     return query( _sql, value )
 }
 

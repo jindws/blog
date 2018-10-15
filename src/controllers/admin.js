@@ -57,7 +57,25 @@ const Login = async ctx=>{
     ctx.session.admin = admin[0]
 }
 
+const Message = async ctx=>{
+    let {admin} = ctx.state
+
+    if(admin){
+        return ctx.body = getResponse(true,{
+            username:admin.username
+        })
+    }
+    ctx.body = getResponse(false,'e201')
+}
+
+const Logout = async ctx=>{
+    delete ctx.session
+    ctx.body = getResponse(true,'操作成功')
+}
+
 module.exports = {
     Create,
     Login,
+    Message,
+    Logout,
 }

@@ -24,4 +24,17 @@ router.post("/create", Admin.Create);
  */
 router.post("/login", Admin.Login);
 
+/**
+ * @desc 登出
+ * @post /api/admin/logout
+ */
+router.post("/logout", Admin.Logout);
+
+
+/**
+ * @desc 用户信息
+ * @post /api/admin/message
+ */
+router.post("/message", Admin.Message);
+
 module.exports = router;

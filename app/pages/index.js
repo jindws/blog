@@ -1,24 +1,25 @@
-import React,{PureComponent} from "react"
+import React,{Component} from "react"
 import { StaticRouter,Router, Route, Link,Switch } from "react-router-dom"
 import { BackTop } from 'antd'
 
 import Home from './Home'
 import Detail from './Detail'
 import Login from './Login'
+import Drawer from '../Component/Drawer'
 
-class App extends PureComponent{
+class App extends Component{
     constructor(props){
         super(props)
         let path = props.path
         if(typeof location === 'object'){
             path = location.pathname
         }
-        this.state = {
-            path
-        }
+        this.path = path
     }
+
     render(){
-        const {path} = this.state
+        const {path} = this
+
         const context = {}
 
         return [
@@ -33,7 +34,8 @@ class App extends PureComponent{
                     </Switch>
                     </div>
              </StaticRouter>,
-             <BackTop/>
+             <BackTop/>,
+             <Drawer/>
         ]
     }
 }

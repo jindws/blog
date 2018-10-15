@@ -8,12 +8,18 @@ import {Tag,Button,message} from 'antd'
 import {observable,action} from 'mobx';
 import { observer } from "mobx-react"
 
+const _data = observable({
+    // title:'',
+    // content:'',
+    // create_time:'',
+    // author:false,
+})
+
+const _onload = action((data)=>Object.assign(_data,data))
+
 @observer class Detail extends Component {
 
-    @observable title
-    @observable content
-    @observable create_time
-    @observable author
+    id;
 
     constructor(props){
         super(props)
@@ -25,14 +31,18 @@ import { observer } from "mobx-react"
         DB.Article.Detail({
             id,
         }).then((data)=>{
-            Object.assign(this,data)
+            _onload(data)
         },({errorMsg})=>{
             message.error(errorMsg)
+            setTimeout(()=>{
+                location.replace('/')
+            },2000)
         })
     }
 
     render() {
-        const {title,content,create_time,id,type = '',author} = this
+        const {title,content,create_time,type = '',author} = _data
+        const {id} = this
         return [
             <Header key='header'/>,
             <section key='detail' id='detail' className='ql-snow'>

@@ -23,18 +23,16 @@ const Index = ctx => {
 
 const Operate = async ctx=>{
     const {id=''} = ctx.params
-    // let detail=[{
-    //     title:'',
-    //     content:'',
-    // }]
-    // if(id){
-    //     detail = await modal.Article.detail([id])
-    // }
-    //
-    // console.log(detail[0].content)
+
+    const {isLogin} = ctx.state
+
+    if(!isLogin){
+        ctx.redirect('/login')
+        return
+    }
+
     const list = await modal.Type.list()
     await ctx.render('operate',{
-        // detail:detail[0],
         id,
         typelist:list.map(itm=>itm.name),
     })

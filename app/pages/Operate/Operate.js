@@ -3,12 +3,23 @@ import {render} from 'react-dom'
 import ReactQuill from 'react-quill'
 import Header from '../../Component/Header'
 import DB from '../../DB'
-import { Button,Select,message,Input} from 'antd'
+import { Button,Select,message,Input,Spin} from 'antd'
 
 const {Option} = Select
 
 import {observable,action} from 'mobx';
 import { observer } from "mobx-react"
+
+const _data = observable({
+    content:'',
+    children:[],
+    type:[],
+    loading:!!defaultid,
+})
+
+const _change = action((name,value)=>_data[name] = value)
+
+const _onload = action((data)=>Object.assign(_data,data))
 
 @observer class Operate extends Component {
 
@@ -22,11 +33,6 @@ import { observer } from "mobx-react"
       ],
     }
 
-    @observable content = ''
-    @observable title
-    @observable children
-    @observable type = []
-
     constructor(props) {
         super(props)
         const children = [];
@@ -35,12 +41,12 @@ import { observer } from "mobx-react"
             children.push(<Option key={itm}>{itm}</Option>);
         }
 
-        this.children = children
+        _change('children',children)
     }
 
 
     _operate(){
-        const {title,content,type} = this
+        const {title,content,type} = _data
         if(!title||!content){
             message.error('请输入标题或内容')
             return
@@ -76,45 +82,56 @@ import { observer } from "mobx-react"
             DB.Article.Detail({
                 id:defaultid
             }).then(({type,...data})=>{
-                this.type = type.split(',')
-                Object.assign(this,data)
+                _change('type',type&&type.split(','))
+                _onload(data)
+                _change('loading',false)
+            },({errorMsg})=>{
+                message.error(errorMsg)
+                setTimeout(()=>{
+                    location.replace('/')
+                },2000)
             })
         }
     }
 
     render() {
-        const {title, content,modules,children,type} = this
+        const {title, content,modules,children,type,loading} = _data
         return [
             <Header key='header'/>,
-            <section id="operate" key='operate'>
-                <div className='title'>
-                    <label>标题</label>
-                        <Input
-                            placeholder='请输入标题'
-                            value={title}
-                            onChange={({target}) => {
-                                this.title = target.value
-                            }}
-                        />
-                </div>
-                <ReactQuill
-                    modules={modules}
-                    value={content} onChange={content=>this.content = content}/>
-                <Select
-                    mode="tags"
-                    style={{ width: '30%',marginRight:'10%' }}
-                    placeholder="添加分类"
-                    value={type}
-                    onChange={type=>{
-                        this.type = type
-                    }}
-                  >
-                    {children}
-              </Select>
-                <Button
-                    type="primary"
-                    onClick={this._operate.bind(this)}>发布</Button>
-            </section>
+            <Spin spinning = {loading} key='spin'>
+                <section id="operate">
+                    <div className='title'>
+                        <label>标题</label>
+                            <Input
+                                placeholder='请输入标题'
+                                value={title}
+                                onChange={({target}) => {
+                                    _change('title',target.value)
+                                }}
+                            />
+                    </div>
+                    <ReactQuill
+                        modules={modules}
+                        value={content}
+                        onChange={content=>{
+                            _change('content',content)
+                        }}/>
+                    <Select
+                        mode="tags"
+                        style={{ width: '30%',marginRight:'10%' }}
+                        placeholder="添加分类"
+                        value={type}
+                        onChange={type=>{
+                            _change('type',type)
+                        }}
+                      >
+                        {children}
+                  </Select>
+                    <Button
+                        type="primary"
+                        onClick={this._operate.bind(this)}>发布</Button>
+                    </section>
+            </Spin>
         ]
     }
 }
