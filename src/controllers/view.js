@@ -24,9 +24,9 @@ const Index = ctx => {
 const Operate = async ctx=>{
     const {id=''} = ctx.params
 
-    const {isLogin} = ctx.state
+    const {islogin} = ctx.state
 
-    if(!isLogin){
+    if(!islogin){
         ctx.redirect('/login')
         return
     }

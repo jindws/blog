@@ -36,7 +36,7 @@ let update = value=>{
 }
 
 let count = (value)=>{
-    let _sql = "select count(*) from article";
+    let _sql = "select count(*) from article where is_delete=false";
     return query( _sql, value )
 }
 

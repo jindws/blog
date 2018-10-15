@@ -43,6 +43,12 @@ export default @observer class _Drawer extends Component{
                  onClose={()=>_change('show',false)}
                  visible={show}
                >
+                 <Button
+                     style={{
+                         display:(status === 1?'':'none')
+                     }}
+                     onClick={()=>location.href = '/operate'}
+                     >写文章</Button>
                  <div className='login_out' style={{
                      display:(status?'':'none')
                  }}>
