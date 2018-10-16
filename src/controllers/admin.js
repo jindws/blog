@@ -47,6 +47,7 @@ const Login = async ctx=>{
     }
 
     const admin = await modal.Admin.login([username,password])
+    console.log(admin)
     if(!admin[0]){
         ctx.body = getResponse(false,'e101')
         return

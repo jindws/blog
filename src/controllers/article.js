@@ -16,7 +16,7 @@ const Create = async ctx=>{
 
     type = [...new Set(type.map(it=>it.trim()))]
     const {admin} = ctx.state
-    await modal.Article.create([
+    const n_article = await modal.Article.create([
         title,
         content,
         type.join(),
@@ -24,16 +24,14 @@ const Create = async ctx=>{
     ])
     ctx.body = getResponse(true,'操作成功')
 
-    CType(type)
+    CType(type,n_article.insertId)
 }
 
-const CType = async type=>{
-    let typelist = await modal.Type.list()
-    typelist = typelist.map(itm=>itm.name)
+const CType = async (type,article_id)=>{
+    await modal.ArticleType.remove([+article_id])
     for (let it of type) {
-        if(!typelist.includes(it)){
-            await modal.Type.create([it])
-        }
+        await modal.Type.create([it])
+        await modal.ArticleType.create([+article_id,it])
     }
 }
 
@@ -95,9 +93,25 @@ const Update = async ctx=>{
     }
 
     type = [...new Set(type.map(it=>it.trim()))]
-    await modal.Article.update([title,content,type,id])
+    await modal.Article.update([title,content,type.join(','),+id])
     ctx.body = getResponse(true,'操作成功')
-    CType(type)
+    CType(type,id)
+}
+
+const Remove = async ctx=>{
+    let {body} = ctx.request
+    let {
+        id,
+    } = body
+    if(!id){
+        ctx.body = getResponse(false,'e001')
+        return
+    }
+
+    await modal.Article.remove([+id])
+    ctx.body = getResponse(true,'操作成功')
+    await modal.ArticleType.remove([+id])
+
 }
 
 module.exports = {
@@ -105,4 +119,5 @@ module.exports = {
     Detail,
     List,
     Update,
+    Remove,
 }

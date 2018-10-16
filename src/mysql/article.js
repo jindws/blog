@@ -31,12 +31,17 @@ let list = value=>{
 }
 
 let update = value=>{
-    let _sql = "update article set title=?,content=?,type=? where id = ?";
+    let _sql = "update article SET title=?,content=?,type=? where id = ?";
     return query( _sql, value )
 }
 
 let count = (value)=>{
     let _sql = "select count(*) from article where is_delete=false";
+    return query( _sql, value )
+}
+
+let remove = (value)=>{
+    let _sql = "update article set is_delete=true where id=?";
     return query( _sql, value )
 }
 
@@ -46,4 +51,5 @@ export {
     list,
     update,
     count,
+    remove,
 }

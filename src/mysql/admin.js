@@ -20,6 +20,7 @@ let create = value => {
 
 //查询用户
 let login = value=>{
+    console.log(value)
     let _sql = "select id from admin where username = ? and password= ?;"
     return query( _sql, value )
 }

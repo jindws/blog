@@ -17,7 +17,7 @@ exports.ifarticleauthor = async(ctx,next) => {
     } = body
     const {admin} = ctx.state
     const detail = await modal.Article.detail([id])
-    if(detail.create_user_id !== admin.id){
+    if(detail[0].create_user_id !== admin.id){
         ctx.body = getResponse(false,'e202')
         return
     }

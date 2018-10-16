@@ -3,9 +3,10 @@ import {render} from 'react-dom'
 import ReactQuill from 'react-quill'
 import Header from '../../Component/Header'
 import DB from '../../DB'
-import { Button,Select,message,Input,Spin} from 'antd'
+import { Select,message,Input,Spin,Modal,Button} from 'antd'
 
 const {Option} = Select
+const {confirm} = Modal;
 
 import {observable,action} from 'mobx';
 import { observer } from "mobx-react"
@@ -77,12 +78,33 @@ const _onload = action((data)=>Object.assign(_data,data))
         })
     }
 
+    _remove(){
+        confirm({
+            title: '温馨提示',
+            content: '确认删除?',
+            okText:'删除',
+            cancelText:'取消',
+            onOk() {
+                DB.Article.Remove({
+                    id:defaultid,
+                }).then(data=>{
+                    message.success('操作成功');
+                    setTimeout(()=>location.replace('/'),2000)
+                },({errorMsg})=>{
+                    message.error(errorMsg);
+                })
+            },
+        });
+    }
+
     componentDidMount(){
         if(defaultid){
             DB.Article.Detail({
                 id:defaultid
             }).then(({type,...data})=>{
-                _change('type',type&&type.split(','))
+                if(type){
+                    _change('type',type.split(','))
+                }
                 _onload(data)
                 _change('loading',false)
             },({errorMsg})=>{
@@ -95,7 +117,7 @@ const _onload = action((data)=>Object.assign(_data,data))
     }
 
     render() {
-        const {title, content,modules,children,type,loading} = _data
+        const {title, content,modules,children,type=[],loading} = _data
         return [
             <Header key='header'/>,
             <Spin spinning = {loading} key='spin'>
@@ -126,11 +148,17 @@ const _onload = action((data)=>Object.assign(_data,data))
                         }}
                       >
                         {children}
-                  </Select>
+                    </Select>
                     <Button
                         type="primary"
-                        onClick={this._operate.bind(this)}>发布</Button>
-                    </section>
+                        onClick={this._operate}>发布</Button>
+                    <Button
+                        type="danger"
+                        style={{display:(defaultid?'':'none')}}
+                        className='remove'
+                        onClick={this._remove}>删除</Button>
+                </section>
+
             </Spin>
         ]
     }

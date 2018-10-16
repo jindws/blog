@@ -47,4 +47,13 @@ router.post("/detail", Article.Detail);
  */
 router.post("/list", Article.List);
 
+/**
+ * @desc 文章删除
+ * @post /api/article/remove
+ * @param {
+        id:String,
+    }
+ */
+router.post("/remove", checkLogin,ifarticleauthor,Article.Remove);
+
 module.exports = router;

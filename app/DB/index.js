@@ -18,6 +18,10 @@ DBF.create('Article', {
     Detail:{
         url       : '/api/article/detail',
         method    : 'POST',
+    },
+    Remove:{
+        url       : '/api/article/remove',
+        method    : 'POST',
     }
 });
 

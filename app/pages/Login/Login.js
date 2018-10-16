@@ -115,7 +115,7 @@ const _clear = action(type=>{
                             type? 'dashed':'primary'
                         }
                         loading = {!type&&loading}
-                        onClick={this._login.bind(this)}>
+                        onClick={this._login}>
                         {
                             type? '我要登录':'登录'
                         }</Button>
@@ -124,7 +124,7 @@ const _clear = action(type=>{
                             type? 'primary':'dashed'
                         }
                         loading = {type&&loading}
-                        onClick={this._regist.bind(this)}
+                        onClick={this._regist}
                         >{type? '确认注册':'我要注册'}</Button>
                 </div>
             </section>
