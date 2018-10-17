@@ -22,6 +22,7 @@ const _change = action((name,value)=>_data[name] = value)
 
 const _onload = action((data)=>Object.assign(_data,data))
 
+@observer
 class Operate extends Component {
 
     modules = {
