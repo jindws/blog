@@ -6,7 +6,7 @@ import Header from '../../Component/Header'
 import {Tag,Button,message} from 'antd'
 
 import {observable,action} from 'mobx';
-import { observer } from "mobx-react"
+import { observer,inject } from "mobx-react"
 
 const _data = observable({
     // title:'',
@@ -17,13 +17,16 @@ const _data = observable({
 
 const _onload = action((data)=>Object.assign(_data,data))
 
-@observer class Detail extends Component {
+@inject('store')
+@observer
+class Detail extends Component {
 
     id;
 
     constructor(props){
         super(props)
         this.id = props.match.params.id
+        this.props.store._change('title','')
     }
 
     componentDidMount(){
@@ -32,6 +35,7 @@ const _onload = action((data)=>Object.assign(_data,data))
             id,
         }).then((data)=>{
             _onload(data)
+            this.props.store._change('title',data.title)
         },({errorMsg})=>{
             message.error(errorMsg)
             setTimeout(()=>{

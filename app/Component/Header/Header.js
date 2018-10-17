@@ -1,12 +1,16 @@
-import React, {PureComponent} from "react"
+import React, {Component} from "react"
 
-export default class Header extends PureComponent{
+import { inject,observer } from "mobx-react"
+
+@inject("store")
+export default @observer class Header extends Component{
 
     _back(){
         location.replace('/')
     }
 
     render(){
+        const {title} = this.props.store
         return <header id='header'>
             <div
                 onClick={this._back.bind(this)}
@@ -19,6 +23,7 @@ export default class Header extends PureComponent{
                     pluginspage="http://www.adobe.com/svg/viewer/install/" />
                     <a href="javascript:;" onClick={this._back.bind(this)}></a>
             </div>
+            <span>{title}</span>
         </header>
     }
 }

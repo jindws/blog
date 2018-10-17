@@ -9,7 +9,7 @@ const {Option} = Select
 const {confirm} = Modal;
 
 import {observable,action} from 'mobx';
-import { observer } from "mobx-react"
+import { observer,inject,Provider} from "mobx-react"
 
 const _data = observable({
     content:'',
@@ -22,7 +22,6 @@ const _change = action((name,value)=>_data[name] = value)
 
 const _onload = action((data)=>Object.assign(_data,data))
 
-@observer
 class Operate extends Component {
 
     modules = {
@@ -120,9 +119,13 @@ class Operate extends Component {
     render() {
         const {title, content,children,type=[],loading} = _data
         return [
-            <Header key='header'/>,
+            <Provider store={{
+                title:'文章编辑',
+            }}>
+                <Header key='header'/>
+            </Provider>,
             <Spin spinning = {loading} key='spin'>
-                <section id="operate">
+                <section id="operate" className='contain'>
                     <div className='title'>
                         <label>标题</label>
                             <Input
@@ -159,7 +162,6 @@ class Operate extends Component {
                         className='remove'
                         onClick={this._remove}>删除</Button>
                 </section>
-
             </Spin>
         ]
     }

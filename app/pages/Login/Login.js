@@ -5,7 +5,7 @@ import {Button,Input,message} from 'antd'
 import md5 from 'md5'
 
 import {observable,action} from 'mobx';
-import { observer } from "mobx-react"
+import { observer ,inject} from "mobx-react"
 
 const _data = observable({
     // loading:false,
@@ -26,10 +26,13 @@ const _clear = action(type=>{
     })
 })
 
-@observer class Login extends Component {
+@inject('store')
+@observer
+class Login extends Component {
 
     constructor(props){
         super(props)
+        this.props.store._change('title','登录')
     }
 
     _login(){
