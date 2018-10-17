@@ -51,7 +51,7 @@ const _change = action((name,value)=>_data[name] = value)
             </header>,
 
             <Spin key='section' spinning={loading}>
-                <section key='section' className='section'>
+                <section key='section' className='section contain'>
                     <Skeleton loading = {loading} paragraph={{ rows: 20 }}>
                         {
                             list.map(itm=>{

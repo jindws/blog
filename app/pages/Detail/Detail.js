@@ -45,7 +45,7 @@ const _onload = action((data)=>Object.assign(_data,data))
         const {id} = this
         return [
             <Header key='header'/>,
-            <section key='detail' id='detail' className='ql-snow'>
+            <section key='detail' id='detail' className='ql-snow contain'>
                 <header>{title}</header>
                 {
                     type&&type.split(',').map(it=><Tag>{it}</Tag>)

@@ -16,7 +16,6 @@
     "pro": "yarn pro:app&&yarn pro:server&&yarn pro:css",
     "pm2": "pm2 reload index.js||pm2 start index.js",
     "pm2:log": "pm2 logs",
-    "pm2:reload": "pm2 reload index.js",
     "pm2:stop": "pm2 stop index.js"
   },
   "author": "",

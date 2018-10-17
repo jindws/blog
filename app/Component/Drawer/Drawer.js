@@ -24,6 +24,7 @@ export default @observer class _Drawer extends Component{
                     position:'fixed',
                     right:'1vw',
                     top:'3vw',
+                    zIndex: 10,
                 }}
                 onClick={()=>{
                     DB.Admin.Message().then(({username})=>{
@@ -45,7 +46,7 @@ export default @observer class _Drawer extends Component{
                >
                  <Button
                      style={{
-                         display:(status === 1?'':'none')
+                         display:(status === 1?'':'none'),
                      }}
                      onClick={()=>location.href = '/operate'}
                      >写文章</Button>

@@ -22,7 +22,8 @@ const _change = action((name,value)=>_data[name] = value)
 
 const _onload = action((data)=>Object.assign(_data,data))
 
-@observer class Operate extends Component {
+@observer
+class Operate extends Component {
 
     modules = {
       toolbar: [
@@ -117,7 +118,7 @@ const _onload = action((data)=>Object.assign(_data,data))
     }
 
     render() {
-        const {title, content,modules,children,type=[],loading} = _data
+        const {title, content,children,type=[],loading} = _data
         return [
             <Header key='header'/>,
             <Spin spinning = {loading} key='spin'>
@@ -133,7 +134,7 @@ const _onload = action((data)=>Object.assign(_data,data))
                             />
                     </div>
                     <ReactQuill
-                        modules={modules}
+                        modules={this.modules}
                         value={content}
                         onChange={content=>{
                             _change('content',content)
