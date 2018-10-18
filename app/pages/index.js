@@ -5,6 +5,8 @@ import { BackTop } from 'antd'
 import Home from './Home'
 import Detail from './Detail'
 import Login from './Login'
+import Type from './Type'
+
 import Drawer from '../Component/Drawer'
 
 import {observable,action} from 'mobx';
@@ -46,6 +48,7 @@ class App extends Component{
                             <Route exact path="/" component={Home} />
                             <Route exact path="/login" component={Login} />
                             <Route exact path="/detail/:id" component={Detail} />
+                            <Route exact path="/type/:type" component={Type} />
                         </Switch>
                         </div>
                  </StaticRouter>

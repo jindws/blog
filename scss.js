@@ -1,8 +1,10 @@
 import './app/base.scss'
-import './app/pages/Home/Home.scss'
-import './app/pages/Login/Login.scss'
-import './app/pages/Detail/Detail.scss'
+import '@pages/Home/Home.scss'
+import '@pages/Login/Login.scss'
+import '@pages/Detail/Detail.scss'
 
-import './app/Component/Header/Header.scss'
+
+import '@comp/Drawer/Drawer.scss'
+import '@comp/Header/Header.scss'
 
 import 'react-quill/dist/quill.snow.css';

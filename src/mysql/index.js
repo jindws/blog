@@ -1,11 +1,11 @@
 const mysql = require('mysql')
-const config = require('../config')
+const {database} = require('../config')
 
 const pool  = mysql.createPool({
-  host     : config.database.HOST,
-  user     : config.database.USERNAME,
-  password : config.database.PASSWORD,
-  database : config.database.DATABASE
+  host     : database.HOST,
+  user     : database.USERNAME,
+  password : database.PASSWORD,
+  database : database.DATABASE
 });
 
 global.query =(sql, values)=> {
@@ -26,6 +26,7 @@ global.query =(sql, values)=> {
         })
     })
 }
+
 global.createTable = ( sql )=> query( sql, [] )
 
 const Article = require('./article')

@@ -1,0 +1,17 @@
+.drawer_list {
+    overflow: scroll;
+    height: 100%;
+    left: 24px;
+    right: 24px;
+    top: 112px;
+    position: absolute;
+
+    button {
+        margin-top: 2vw;
+    }
+}
+
+.ant-drawer-body {
+    height: 80%;
+    overflow: hidden;
+}

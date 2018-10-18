@@ -12,6 +12,13 @@ module.exports = {
         publicPath:'./dist/'
     },
     devtool: 'inline-source-map',
+    resolve:{
+        extensions: ['.js', '.scss'],
+        alias:{
+            '@pages': path.resolve(__dirname, './app/pages/'),
+            '@comp': path.resolve(__dirname, './app/Component/'),
+        }
+    },
     module: {
         rules: [
             {

@@ -4,7 +4,7 @@ const StaticRouter = require('react-router-dom').StaticRouter
 const App = require('../../app/pages').default
 const template = require('../template')
 
-const Index = ctx => {
+const Index = async ctx => {
     const context = {}
 
     let body = renderToString(

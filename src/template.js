@@ -1,4 +1,4 @@
-module.exports =  ({ body='',title }) => {
+module.exports =  ({ body='',title}) => {
     return `<!DOCTYPE html>
       <html>
         <head>

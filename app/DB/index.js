@@ -43,3 +43,10 @@ DBF.create('Admin', {
         method    : 'POST',
     }
 });
+
+DBF.create('Type', {
+    List:{
+        url       : '/api/type/list',
+        method    : 'POST',
+    },
+});

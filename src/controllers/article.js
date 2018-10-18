@@ -69,9 +69,16 @@ const List = async ctx=>{
     const {
         pageSize=10,
         pageNum=1,
+        type,
     } = body
-    const list = await modal.Article.list([(+pageNum-1)*+pageSize,pageSize])
-    const count = await modal.Article.count()
+    let list,count
+    if(type){
+        list = await modal.Article.searchlist([type,(+pageNum-1)*+pageSize,pageSize])
+        count = await modal.Article.searchcount([type])
+    }else{
+        list = await modal.Article.list([(+pageNum-1)*+pageSize,pageSize])
+        count = await modal.Article.count()
+    }
 
     ctx.body = getResponse(true,{
         list,

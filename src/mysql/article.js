@@ -1,4 +1,4 @@
-let modal =
+const modal =
     `create table if not exists article(
      id INT NOT NULL AUTO_INCREMENT,
      title VARCHAR(100) NOT NULL,
@@ -13,35 +13,49 @@ let modal =
 createTable(modal)
 
 // 发表文章
-let create = value => {
-  let _sql = `insert into article set title=?,content=?,type=?,create_user_id=?,create_time=${Date.now()};`
+const create = value => {
+  const _sql = `insert into article set title=?,content=?,type=?,create_user_id=?,create_time=${Date.now()};`
   return query( _sql, value )
 }
 
 //查看文章详情
-let detail = value=>{
-    let _sql = "select title,content,create_time,type,create_user_id from article where id = ?;"
+const detail = value=>{
+    const _sql = "select title,content,create_time,type,create_user_id from article where id = ?;"
     return query( _sql, value )
 }
 
 //文章列表
-let list = value=>{
-    let _sql = "select id,title,content,create_time,type from article where is_delete=false order by create_time desc limit ?,?;"
+const list = value=>{
+    const _sql = `select id,title,content,create_time,type from article where is_delete=false
+        order by create_time desc limit ?,?;`
     return query( _sql, value )
 }
 
-let update = value=>{
-    let _sql = "update article SET title=?,content=?,type=? where id = ?";
+const searchlist = value=>{
+    const _sql = `select * from article where id in
+        (select article_id from articleType where type=? and is_delete=false)
+        order by create_time desc limit ?,?;`
+        console.log(value)
+    return query( _sql, value )
+}
+const update = value=>{
+    const _sql = "update article SET title=?,content=?,type=? where id = ?";
     return query( _sql, value )
 }
 
-let count = (value)=>{
-    let _sql = "select count(*) from article where is_delete=false";
+const count = (value)=>{
+    const _sql = "select count(*) from article where is_delete=false";
     return query( _sql, value )
 }
 
-let remove = (value)=>{
-    let _sql = "update article set is_delete=true where id=?";
+const searchcount = (value)=>{
+    const _sql =`select count(*) from article where id in
+        (select article_id from articleType where type=? and is_delete=false)`
+    return query( _sql, value )
+}
+
+const remove = (value)=>{
+    const _sql = "update article set is_delete=true where id=?";
     return query( _sql, value )
 }
 
@@ -49,7 +63,9 @@ export {
     create,
     detail,
     list,
+    searchlist,
     update,
     count,
+    searchcount,
     remove,
 }

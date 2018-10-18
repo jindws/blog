@@ -1,19 +1,14 @@
 const Router = require("koa-router");
-
-const view = require("./view");
-const article = require("./article");
-const admin = require("./admin");
-
+const fs = require('fs')
+const path = require('path')
 const router = Router();
 
-const routes = [
-	view,
-	article,
-	admin,
-];
-
-for (let route of routes) {
-	router.use(route.routes(), route.allowedMethods());
-}
+const basename = path.basename(module.filename);
+fs.readdirSync(__dirname)
+.filter(file=> file.endsWith('.js') && file !== basename)
+.forEach(function(file) {
+	const route = require(path.join(__dirname, file));
+    router.use(route.routes(), route.allowedMethods());
+});
 
 module.exports = router;
