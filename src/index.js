@@ -10,12 +10,19 @@ const views = require('koa-views')
 
 const app = new Koa()
 app.use(bodyParser())
-app.use(logger())
+app.use(logger({
+  transporter: async(str, args) => {
+      const time = args[4]
+      if(time){//return
+          console.log(moment().format('MM-DD HH:mm:ss'),'<--',args[1],args[2],args[3],time,args[5])
+      }else{
+          console.log(moment().format('MM-DD HH:mm:ss'),'-->',args[1],args[2])
+      }
+  }
+}))
 app.use(serve('.'));
 
 const config = require('./config');
-
-
 
 // session存储配置
 const sessionMysqlConfig = {
