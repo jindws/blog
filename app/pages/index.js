@@ -8,6 +8,7 @@ import Login from './Login'
 import Type from './Type'
 
 import Drawer from '../Component/Drawer'
+import Footer from '../Component/Footer'
 
 import {observable,action} from 'mobx';
 import {observer, Provider} from "mobx-react"
@@ -54,6 +55,7 @@ class App extends Component{
                  </StaticRouter>
                  <BackTop/>
                  <Drawer/>
+                 <Footer/>
             </object>
         </Provider>
     }

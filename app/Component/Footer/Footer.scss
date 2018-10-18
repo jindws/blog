@@ -1,0 +1,31 @@
+footer {
+    display: flex !important;
+    white-space: nowrap;
+    flex-wrap: wrap;
+    padding: 11px 15px;
+    background-color: #f6faf2;
+    border-top: 1px solid #d3d7cf;
+    border-bottom: 1px solid #f6faf2;
+    white-space: nowrap;
+    justify-content: flex-end;
+    opacity: 0;
+    animation: op 3s;
+    animation-fill-mode: forwards;
+
+    animation:opacity label {
+        padding-left: 10vw;
+    }
+}
+@keyframes op {
+    0% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}

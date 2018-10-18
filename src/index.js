@@ -7,6 +7,7 @@ const session = require('koa-session-minimal');
 const MysqlStore = require('koa-mysql-session');
 const staticCache = require('koa-static-cache')
 const views = require('koa-views')
+const moment = require('moment')
 
 const app = new Koa()
 app.use(bodyParser())
