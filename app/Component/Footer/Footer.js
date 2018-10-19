@@ -1,12 +1,12 @@
 import React, {Component} from "react"
-import { Drawer,Button,Popconfirm,message} from 'antd'
+import {Tag} from 'antd'
 
 class Footer extends Component{
 
     render(){
         return <footer>
-            <span>浙ICP备18035476号</span>
-            <label>github: <a href="https://github.com/moiamoia/blog" target='_blank'>https://github.com/moiamoia/blog</a></label>
+            <span><Tag>浙ICP备18035476号</Tag></span>
+            <label><Tag>github: <a href="https://github.com/moiamoia/blog" target='_blank'>https://github.com/moiamoia/blog</a></Tag></label>
         </footer>
     }
 }

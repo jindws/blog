@@ -2,6 +2,7 @@ import React,{Component} from "react"
 import {render} from 'react-dom'
 import ReactQuill from 'react-quill'
 import Header from '../../Component/Header'
+import Footer from '../../Component/Footer'
 import DB from '../../DB'
 import { Select,message,Input,Spin,Modal,Button} from 'antd'
 
@@ -163,7 +164,8 @@ class Operate extends Component {
                         className='remove'
                         onClick={this._remove}>删除</Button>
                 </section>
-            </Spin>
+            </Spin>,
+            <Footer/>
         ]
     }
 }

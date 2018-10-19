@@ -17,18 +17,14 @@ dl {
     }
 }
 
-.login_out {
-    position: absolute;
-    bottom: 2vw;
-    right: 2vw;
-}
-
 .contain {
     max-width: 720px;
     width: 95%;
     margin: 0 auto 50px;
 }
 
-.ant-spin-nested-loading {
-    margin-bottom: 50px;
+#root {
+    position: relative;
+    min-height: 100%;
+    padding-bottom: 100px;
 }

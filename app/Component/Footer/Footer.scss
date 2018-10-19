@@ -11,6 +11,9 @@ footer {
     opacity: 0;
     animation: op 3s;
     animation-fill-mode: forwards;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
 
     animation:opacity label {
         padding-left: 10vw;
