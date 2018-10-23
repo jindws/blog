@@ -86,7 +86,7 @@ class Login extends Component {
         return [
             <Header/>,
             <section id='login'>
-                <em>login</em>,
+                <em>{type? '注册':'登录'}</em>,
                 <Input addonBefore="用户名"
                     value={username}
                     onChange={({target})=>{
