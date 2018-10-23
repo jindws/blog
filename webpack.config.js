@@ -1,4 +1,5 @@
 const path = require("path");
+const webpack = require("webpack");
 
 module.exports = {
     entry: {
@@ -6,19 +7,20 @@ module.exports = {
     },
     output: {
         path: path.resolve(__dirname + '/dist'),
+        chunkFilename: 'operate.bundle.js',
         filename: '[name].js'
     },
     externals:{
         react: 'React',
 		'react-dom': 'ReactDOM',
 		'react-router-dom': 'ReactRouterDOM',
-        // 'react-markdown': 'ReactMarkdown',
+        "moment":"moment",
+        "mobx":"mobx",
     },
     module: {
         rules: [
             {
                 test: /\.js[x]?$/,
-                // exclude:/node_modules/,
                 loader: 'babel-loader'
             }, {
                 test: /\.(css|scss)/,
@@ -28,5 +30,10 @@ module.exports = {
                 loader: 'svg-sprite-loader',
             }
         ]
-    }
+    },
+    optimization: {
+        splitChunks: {
+            chunks: 'all'
+        }
+    },
 }

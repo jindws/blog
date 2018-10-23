@@ -16,6 +16,8 @@ module.exports = {
         react: 'React',
 		'react-dom': 'ReactDOM',
 		'react-router-dom': 'ReactRouterDOM',
+        "moment":"moment",
+        "mobx":"mobx",
     },
     module: {
         rules: [

@@ -10,7 +10,7 @@ const {Option} = Select
 const {confirm} = Modal;
 
 import {observable,action} from 'mobx';
-import { observer,inject,Provider} from "mobx-react"
+import { observer,inject,Provider} from "mobx-react/custom"
 
 const _data = observable({
     content:'',

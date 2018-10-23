@@ -5,7 +5,7 @@ import {Button,Input,message} from 'antd'
 import md5 from 'md5'
 
 import {observable,action} from 'mobx';
-import { observer ,inject} from "mobx-react"
+import { observer ,inject} from "mobx-react/custom"
 
 const _data = observable({
     // loading:false,

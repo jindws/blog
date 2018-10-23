@@ -11,7 +11,7 @@ import Drawer from '../Component/Drawer'
 import Footer from '../Component/Footer'
 
 import {observable,action} from 'mobx';
-import {observer, Provider} from "mobx-react"
+import {observer, Provider} from "mobx-react/custom"
 
 class Store{
     @observable title

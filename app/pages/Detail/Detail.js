@@ -6,7 +6,7 @@ import Header from '../../Component/Header'
 import {Tag,Button,message} from 'antd'
 
 import {observable,action} from 'mobx';
-import { observer,inject } from "mobx-react"
+import { observer,inject } from "mobx-react/custom"
 
 const _data = observable({
     // title:'',

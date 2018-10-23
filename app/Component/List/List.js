@@ -1,7 +1,7 @@
 import React, {Component} from "react"
-import {Tag,message,Pagination,Spin,Skeleton} from 'antd'
+import {Tag,message,Pagination,Spin,Skeleton,Alert} from 'antd'
 import {observable,action} from 'mobx';
-import { observer ,inject} from "mobx-react"
+import { observer ,inject} from "mobx-react/custom"
 import DB from '../../DB'
 import moment from 'moment'
 
@@ -40,49 +40,67 @@ export default @observer class List extends Component{
         })
     }
 
-    render(){
+    _List(){
         const {list,count,loading} = _data
         const {marginTop=0} = this.props
-        return <Spin key='section' spinning={loading}>
-            <section key='section'
-                style={{
-                    marginTop,
-                }}
-                className='section contain'>
-                <Skeleton loading = {loading} paragraph={{ rows: 20 }}>
-                    {
-                        list.map(itm=>{
-                            return <dl key={itm.id}>
-                                <dt>
-                                    <a href={`/detail/${itm.id}`}>{itm.title}</a>
-                                </dt>
-                                <dd className='content'
-                                    dangerouslySetInnerHTML = {{ __html: itm.content||'暂无预览'}}
-                                />
 
-                                <dd className='time'>
-                                    {
-                                        itm.type&&itm.type.split(',').map(it=><Tag onClick={()=>{
-                                            location.href = `/type/${it}`
-                                        }}>{it}</Tag>)
-                                    }
-                                    {moment(itm.create_time).format('YYYY-MM-DD HH:mm:ss')}
-                                </dd>
-                            </dl>
-                        })
-                    }
-                </Skeleton>
-            </section>
-            <Pagination total={count}
-                onChange = {pageNum=>{
-                    _change('pageNum',pageNum)
-                    this.getList()
-                }}
-                onShowSizeChange={(pageNum, pageSize)=>{
+        if(!count&&!loading){
+            return <Alert
+                    style={{
+                        margin:'80px 20%',
+                    }}
+                  message="温馨提示"
+                  description="暂无内容"
+                  type="error"
+                  showIcon
+                />
+        }
+        return [<section key='section'
+            style={{
+                marginTop,
+            }}
+            className='section contain'>
+            <Skeleton loading = {loading} paragraph={{ rows: 20 }}>
+                {
+                    list.map(itm=>{
+                        return <dl key={itm.id}>
+                            <dt>
+                                <a href={`/detail/${itm.id}`}>{itm.title}</a>
+                            </dt>
+                            <dd className='content'
+                                dangerouslySetInnerHTML = {{ __html: itm.content||'暂无预览'}}
+                            />
+
+                            <dd className='time'>
+                                {
+                                    itm.type&&itm.type.split(',').map(it=><Tag onClick={()=>{
+                                        location.href = `/type/${it}`
+                                    }}>{it}</Tag>)
+                                }
+                                {moment(itm.create_time).format('YYYY-MM-DD HH:mm:ss')}
+                            </dd>
+                        </dl>
+                    })
+                }
+            </Skeleton>
+        </section>,
+        <Pagination total={count}
+            onChange = {pageNum=>{
                 _change('pageNum',pageNum)
-                _change('pageSize',pageSize)
                 this.getList()
-            }} showSizeChanger showQuickJumper />
+            }}
+            onShowSizeChange={(pageNum, pageSize)=>{
+            _change('pageNum',pageNum)
+            _change('pageSize',pageSize)
+            this.getList()
+        }} showSizeChanger showQuickJumper />]
+    }
+
+    render(){
+        const {loading} = _data
+
+        return <Spin key='section' spinning={loading}>
+            {this._List()}
         </Spin>
     }
 }

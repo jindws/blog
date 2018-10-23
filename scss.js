@@ -7,5 +7,3 @@ import '@pages/Detail/Detail.scss'
 import '@comp/Drawer/Drawer.scss'
 import '@comp/Header/Header.scss'
 import '@comp/Footer/Footer.scss'
-
-import 'react-quill/dist/quill.snow.css';

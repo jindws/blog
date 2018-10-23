@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom'
 import Header from '../../Component/Header'
 import List from '../../Component/List'
 
-import { observer ,inject} from "mobx-react"
+import { observer ,inject} from "mobx-react/custom"
 
 
 @inject('store')

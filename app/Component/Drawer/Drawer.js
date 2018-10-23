@@ -3,7 +3,7 @@ import { Drawer,Button,Popconfirm,message} from 'antd'
 import DB from '../../DB'
 
 import {observable,action} from 'mobx';
-import { observer } from "mobx-react"
+import { observer } from "mobx-react/custom"
 
 const _data = observable({
     show:false,
