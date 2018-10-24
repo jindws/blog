@@ -35,7 +35,6 @@ const searchlist = value=>{
     const _sql = `select * from article where id in
         (select article_id from articleType where type=? and is_delete=false)
         order by create_time desc limit ?,?;`
-        console.log(value)
     return query( _sql, value )
 }
 const update = value=>{

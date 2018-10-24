@@ -84,7 +84,9 @@ export default @observer class List extends Component{
                 }
             </Skeleton>
         </section>,
-        <Pagination total={count}
+        <Pagination
+            key='Pagination'
+            total={count}
             onChange = {pageNum=>{
                 _change('pageNum',pageNum)
                 this.getList()

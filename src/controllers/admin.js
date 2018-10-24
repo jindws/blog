@@ -70,7 +70,7 @@ const Message = async ctx=>{
 }
 
 const Logout = async ctx=>{
-    delete ctx.session
+    Reflect.deleteProperty(ctx,'session')
     ctx.body = getResponse(true,'操作成功')
 }
 

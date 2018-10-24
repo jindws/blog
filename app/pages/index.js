@@ -17,7 +17,7 @@ class Store{
     @observable title
 
     @action _change = (name,value)=>{
-        this.title = value
+        this[name] = value
     }
 }
 
