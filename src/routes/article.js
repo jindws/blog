@@ -43,9 +43,20 @@ router.post("/detail", Article.Detail);
  * @param {
         pageSize:Number,
         pageNum:Number,
+        type:String,//可选
     }
  */
 router.post("/list", Article.List);
+
+/**
+ * @desc 我的文章列表
+ * @post /api/article/mylist
+ * @param {
+        pageSize:Number,
+        pageNum:Number,
+    }
+ */
+router.post("/mylist", Article.MyList);
 
 /**
  * @desc 文章删除

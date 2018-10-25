@@ -118,7 +118,22 @@ const Remove = async ctx=>{
     await modal.Article.remove([+id])
     ctx.body = getResponse(true,'操作成功')
     await modal.ArticleType.remove([+id])
+}
 
+const MyList = async ctx=>{
+    let {body} = ctx.request
+    const {id} = ctx.state.admin
+    const {
+        pageSize=10,
+        pageNum=1,
+    } = body
+    const list = await modal.Article.mylist([id,(+pageNum-1)*+pageSize,pageSize])
+    const count = await modal.Article.mycount([id])
+
+    ctx.body = getResponse(true,{
+        list,
+        count:count[0]['count(*)'],
+    })
 }
 
 module.exports = {
@@ -127,4 +142,5 @@ module.exports = {
     List,
     Update,
     Remove,
+    MyList,
 }

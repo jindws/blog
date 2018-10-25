@@ -23,3 +23,13 @@ exports.ifarticleauthor = async(ctx,next) => {
     }
     await next()
 }
+
+
+
+exports.checkLoginredirect = async(ctx,next) => {
+    if(!ctx.state.islogin){
+        ctx.redirect('/login')
+        return
+    }
+    await next()
+}

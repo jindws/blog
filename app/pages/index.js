@@ -6,6 +6,7 @@ import Home from './Home'
 import Detail from './Detail'
 import Login from './Login'
 import Type from './Type'
+import My from './My'
 
 import Drawer from '../Component/Drawer'
 import Footer from '../Component/Footer'
@@ -15,6 +16,7 @@ import {observer, Provider} from "mobx-react/custom"
 
 class Store{
     @observable title
+    @observable error
 
     @action _change = (name,value)=>{
         this[name] = value
@@ -34,7 +36,16 @@ class App extends Component{
         this.path = path
     }
 
+    componentDidCatch(err, info) {
+        console.log(err,info)
+        nstore._change('error',err)
+    }
+
     render(){
+        if(nstore.error){
+            return `this or its children has error`;
+        }
+
         const {path} = this
 
         const context = {}
@@ -50,6 +61,7 @@ class App extends Component{
                             <Route exact path="/login" component={Login} />
                             <Route exact path="/detail/:id" component={Detail} />
                             <Route exact path="/type/:type" component={Type} />
+                            <Route exact path="/my" component={My} />
                         </Switch>
                         </div>
                  </StaticRouter>

@@ -17,7 +17,8 @@ const _change = action((name,value)=>_data[name] = value)
 
 
 @inject("store")
-export default @observer class List extends Component{
+export default
+@observer class List extends Component{
 
     componentDidMount(){
         this.getList()
@@ -25,19 +26,30 @@ export default @observer class List extends Component{
 
     getList(){
         const {pageNum,pageSize} = _data
-        const {type} = this.props
+        const {type,my} = this.props
         _change('loading',true)
-        DB.Article.List({
-            pageSize,
-            pageNum,
-            type,
-        }).then(({count,list})=>{
-            _change('count',count)
-            _change('list',list)
-            _change('loading',false)
-        },({errorMsg})=>{
-            message.error(errorMsg)
-        })
+        if(!my){
+            DB.Article.List({
+                pageSize,
+                pageNum,
+                type,
+            }).then(this._listBack,this._errBack)
+        }else{
+            DB.Article.MyList({
+                pageSize,
+                pageNum,
+            }).then(this._listBack,this._errBack)
+        }
+    }
+
+    _listBack({count,list}){
+        _change('count',count)
+        _change('list',list)
+        _change('loading',false)
+    }
+
+    _errBack({errorMsg}){
+        message.error(errorMsg)
     }
 
     _List(){

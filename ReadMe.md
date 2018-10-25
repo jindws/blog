@@ -4,6 +4,7 @@
 - 登录注册`https://blog.jindw.cn/login`
 - 详情页`https://blog.jindw.cn/detail/*`
 - 编辑文章`https://blog.jindw.cn/operate/*`
+- 我的文章`https://blog.jindw.cn/my`
 
 ### 技术栈
 - koa2

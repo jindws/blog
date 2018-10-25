@@ -22,7 +22,11 @@ DBF.create('Article', {
     Remove:{
         url       : '/api/article/remove',
         method    : 'POST',
-    }
+    },
+    MyList:{
+        url       : '/api/article/mylist',
+        method    : 'POST',
+    },
 });
 
 DBF.create('Admin', {
@@ -49,4 +53,5 @@ DBF.create('Type', {
         url       : '/api/type/list',
         method    : 'POST',
     },
+
 });

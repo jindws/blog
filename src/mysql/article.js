@@ -58,6 +58,16 @@ const remove = (value)=>{
     return query( _sql, value )
 }
 
+const mylist = (value)=>{
+    const _sql = "SELECT * FROM blog.article  where create_user_id = ? order by create_time desc limit ?,?;";
+    return query( _sql, value )
+}
+
+const mycount = (value)=>{
+    const _sql = "SELECT count(*) FROM blog.article where create_user_id = ?;";
+    return query( _sql, value )
+}
+
 export {
     create,
     detail,
@@ -67,4 +77,6 @@ export {
     count,
     searchcount,
     remove,
+    mylist,
+    mycount,
 }

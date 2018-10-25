@@ -32,6 +32,7 @@ export default @observer class _Drawer extends Component{
                     right:'1vw',
                     top:'3vw',
                     zIndex: 10,
+                    background: 'transparent',
                 }}
                 onClick={()=>{
                     DB.Admin.Message().then(({username})=>{
@@ -43,7 +44,8 @@ export default @observer class _Drawer extends Component{
                     })
                     _change('show',true)
                 }}
-                type="primary" shape="circle" icon="profile" />,
+                type="dashed"
+                icon="profile">更多</Button>,
             <Drawer
                  title={username}
                  placement="right"
@@ -54,9 +56,14 @@ export default @observer class _Drawer extends Component{
                  <Button
                      style={{
                          display:(status === 1?'':'none'),
+                         marginRight:20,
                      }}
                      onClick={()=>location.href = '/operate'}
                      >写文章</Button>
+                 <Button
+                     type = 'primary'
+                     onClick={()=>location.href = '/my'}
+                     >我的文章</Button>
                  <div className='drawer_list'>
                      {
                          list.map(({type,sum})=>{

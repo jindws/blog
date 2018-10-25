@@ -6,19 +6,19 @@ import { observer ,inject} from "mobx-react/custom"
 
 
 @inject('store')
-@observer class Type extends Component {
+@observer class My extends Component {
     constructor(props){
         super(props)
-        this.props.store._change('title',decodeURI(props.match.params.type))
+        this.props.store._change('title','我的文章')
     }
 
     render() {
 
         return [
             <Header/>,
-            <List marginTop='8rem' type={this.props.store.title}/>,
+            <List marginTop='8rem' my={true}/>,
         ]
     }
 }
 
-export default Type
+export default My
