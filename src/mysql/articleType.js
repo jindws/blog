@@ -21,14 +21,9 @@ let remove = value => {
 }
 
 let list = value => {
-  // let _sql = `select * from article where article.id in
-  //           (select articleType.article_id from articleType where is_delete = false and articleType.type=?) order by article.id desc;`
-  let _sql = "SELECT type, count(*) AS sum FROM blog.articleType  GROUP BY type order by sum desc;"
+  let _sql = "SELECT type, count(*) AS sum FROM blog.articleType where  blog.articleType.is_delete= false GROUP BY type order by sum desc;"
   return query( _sql, value )
 }
-
-
-
 
 export {
     create,
