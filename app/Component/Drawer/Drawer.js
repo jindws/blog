@@ -32,7 +32,6 @@ export default @observer class _Drawer extends Component{
                     right:'1vw',
                     top:'3vw',
                     zIndex: 10,
-                    background: 'transparent',
                 }}
                 onClick={()=>{
                     DB.Admin.Message().then(({username})=>{

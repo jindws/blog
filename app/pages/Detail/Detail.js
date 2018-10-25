@@ -52,7 +52,7 @@ class Detail extends Component {
             <section key='detail' id='detail' className='ql-snow contain'>
                 <header>{title}</header>
                 {
-                    type&&type.split(',').map(it=><Tag>{it}</Tag>)
+                    type&&type.split(',').map(it=><Tag onClick={()=>location.href = `/type/${it}`}>{it}</Tag>)
                 }
                 <time>{create_time&&moment(create_time).format('YYYY-MM-DD HH:mm:ss')}</time>
                 <div className='content ql-editor'

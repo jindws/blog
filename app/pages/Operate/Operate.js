@@ -26,14 +26,47 @@ const _onload = action((data)=>Object.assign(_data,data))
 @observer
 class Operate extends Component {
 
-    modules = {
-      toolbar: [
-        [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-        [ 'bold', 'italic', 'underline','strike', {color:[]},{background:[]}],
-        [{align:[]},{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
-        ['link', 'image','video',{script:'sub'},{script:'super'}],
-        ['blockquote','clean']
-      ],
+    modules = {                      // 富文本编辑器格式
+        toolbar: {
+            container:[
+             [{ 'header': [1, 2,3,4,5, false] }],
+             ['bold', 'italic', 'underline','strike', 'blockquote'],
+             [{ 'size': ['small', false, 'large', 'huge'] }],
+             [{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
+             ['link', 'image'],
+             [{ 'align': [] }],
+             [{ 'color': [] }, { 'background': [] }],
+             ['clean']
+            ],
+            handlers: {
+                'image': (e)=> {
+                    let input = document.createElement('input')
+                    input.type = 'file'
+
+                    input.accept="image/*"
+
+                    input.onchange = this.uploadCallback
+                    input.click()
+                }
+            }
+        }
+    }
+
+    uploadCallback = (e) =>{
+        const t = this;
+        const file = e.target.files[0]
+        const fileName = file.name
+        let body = new FormData()
+        body.append('files',file)
+        fetch('/api/uploadfile',{
+            method: "POST",
+            body,
+        }).then(data=>data.json()).then(({data})=>{
+            const link = data.src
+            let editor = this.editor.getEditor()
+            let sel = editor.getSelection()
+            editor.clipboard.dangerouslyPasteHTML(sel.index, `<img src="${link}"/>` || '');
+        })
     }
 
     constructor(props) {
@@ -141,6 +174,7 @@ class Operate extends Component {
                     <ReactQuill
                         modules={this.modules}
                         value={content}
+                        ref={editor=>this.editor = editor}
                         onChange={content=>{
                             _change('content',content)
                         }}/>
