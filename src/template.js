@@ -5,7 +5,7 @@ module.exports =  ({ body='',title}) => {
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <meta http-equiv="X-UA-Compatible" content="ie=edge">
-            <link rel="shortcut icon" href="./image/favicon.png" />
+            <link rel="shortcut icon" href="/image/favicon.png" />
             <title>${title}</title>
             <script type="text/javascript" src="/dist/css.js" charset="utf-8"></script>
             <link href="https://cdnjs.cloudflare.com/ajax/libs/antd/3.10.0/antd.min.css" rel="stylesheet">
@@ -14,9 +14,9 @@ module.exports =  ({ body='',title}) => {
         <body>
           <div id="root">${body}</div>
         </body>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.4.0/umd/react.production.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.4.0/umd/react-dom.production.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/react-router-dom/4.2.2/react-router-dom.min.js"></script>
+        <script src="https://cdn.bootcss.com/react/16.5.1/umd/react.production.min.js"></script>
+        <script src="https://cdn.bootcss.com/react-dom/16.5.1/umd/react-dom.production.min.js"></script>
+        <script src="https://cdn.bootcss.com/react-router-dom/4.3.1/react-router-dom.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
         <script src="https://cdn.bootcss.com/mobx/5.5.0/mobx.umd.min.js"></script>
         <script type="text/javascript" src="/dist/app.js" charset="utf-8"></script>
