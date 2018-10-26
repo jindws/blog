@@ -5,7 +5,7 @@ class Home extends Component {
     render() {
         return [
             <header key='header' className='header'>
-                <div className='animated fadeIn'>
+                <div className='animated pulse'>
                     A brand new start.
                 </div>
             </header>,
