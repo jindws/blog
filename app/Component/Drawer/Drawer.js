@@ -1,9 +1,10 @@
 import React, {Component} from "react"
-import { Drawer,Button,Popconfirm,message} from 'antd'
+import { Drawer,Button,Popconfirm,message,Input} from 'antd'
 import DB from '../../DB'
 
 import {observable,action} from 'mobx';
 import { observer } from "mobx-react/custom"
+const Search = Input.Search;
 
 const _data = observable({
     show:false,
@@ -52,6 +53,15 @@ export default @observer class _Drawer extends Component{
                  onClose={()=>_change('show',false)}
                  visible={show}
                >
+                  <Search
+                      placeholder='按标题搜索'
+                      onSearch={value =>{
+                          if(!value.trim()){
+                              return message.error('请先输入内容')
+                          }
+                          location.href = `/search/${value}`
+                      }}
+                  />
                  <Button
                      style={{
                          display:(status === 1?'':'none'),

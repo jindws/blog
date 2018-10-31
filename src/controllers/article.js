@@ -70,11 +70,15 @@ const List = async ctx=>{
         pageSize=10,
         pageNum=1,
         type,
+        search,
     } = body
     let list,count
     if(type){
         list = await modal.Article.searchlist([type,(+pageNum-1)*+pageSize,pageSize])
         count = await modal.Article.searchcount([type])
+    }else if(search){
+        list = await modal.Article.searchtitlelist([`%${search}%`,(+pageNum-1)*+pageSize,pageSize])
+        count = await modal.Article.searchtitlecount([`%${search}%`])
     }else{
         list = await modal.Article.list([(+pageNum-1)*+pageSize,pageSize])
         count = await modal.Article.count()

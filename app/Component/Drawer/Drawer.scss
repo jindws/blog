@@ -3,7 +3,7 @@
     height: 70%;
     left: 24px;
     right: 24px;
-    top: 120px;
+    top: 140px;
     position: absolute;
     padding-bottom: 50px;
 
@@ -15,6 +15,11 @@
 .ant-drawer-body {
     height: 80%;
     overflow: hidden;
+}
+
+.ant-input-search {
+    position: relative;
+    top: -10px;
 }
 
 .login_out {

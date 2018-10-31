@@ -26,9 +26,17 @@ export default
 
     getList(){
         const {pageNum,pageSize} = _data
-        const {type,my} = this.props
+        const {type,my,search} = this.props
+        console.log(search)
         _change('loading',true)
-        if(!my){
+
+        if(search){
+            DB.Article.List({
+                pageSize,
+                pageNum,
+                search,
+            }).then(this._listBack,this._errBack)
+        }else if(!my){
             DB.Article.List({
                 pageSize,
                 pageNum,

@@ -39,6 +39,13 @@ const searchlist = value=>{
         order by create_time desc limit ?,?;`
     return query( _sql, value )
 }
+
+const searchtitlelist = value=>{
+    const _sql = `select * from article where title like ? and is_delete=false
+    order by create_time desc limit ?,?;`
+    return query( _sql, value )
+}
+
 const update = value=>{
     const _sql = "update article SET title=?,content=?,type=? where id = ?";
     return query( _sql, value )
@@ -52,6 +59,11 @@ const count = (value)=>{
 const searchcount = (value)=>{
     const _sql =`select count(*) from article where id in
         (select article_id from articleType where type=? and is_delete=false)`
+    return query( _sql, value )
+}
+
+const searchtitlecount  = (value)=>{
+    const _sql =`select count(*) from article where title like ? and is_delete=false`
     return query( _sql, value )
 }
 
@@ -75,9 +87,11 @@ export {
     detail,
     list,
     searchlist,
+    searchtitlelist,
     update,
     count,
     searchcount,
+    searchtitlecount,
     remove,
     mylist,
     mycount,

@@ -7,6 +7,7 @@ import Detail from './Detail'
 import Login from './Login'
 import Type from './Type'
 import My from './My'
+import Search from './Search'
 
 import Drawer from '../Component/Drawer'
 import Footer from '../Component/Footer'
@@ -62,6 +63,7 @@ class App extends Component{
                             <Route exact path="/detail/:id" component={Detail} />
                             <Route exact path="/type/:type" component={Type} />
                             <Route exact path="/my" component={My} />
+                            <Route exact path="/search/:search" component={Search} />
                         </Switch>
                         </div>
                  </StaticRouter>

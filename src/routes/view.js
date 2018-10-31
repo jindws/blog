@@ -17,4 +17,6 @@ router.get("/type/:type", View.Index);
 
 router.get("/my",checkLoginredirect, View.Index);
 
+router.get("/search/:search",checkLoginredirect, View.Index);
+
 module.exports = router;
