@@ -1,3 +1,5 @@
+import moment from 'moment'
+
 let modal =
     `create table if not exists type(
      id INT NOT NULL AUTO_INCREMENT,
@@ -10,7 +12,7 @@ createTable(modal)
 
 // 发表文章
 let create = value => {
-  let _sql = `replace into type set name=?,create_time=${Date.now()};`
+  let _sql = `replace into type set name=?,create_time=${moment().valueOf()};`
   return query( _sql, value )
 }
 

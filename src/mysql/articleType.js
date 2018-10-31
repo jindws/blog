@@ -1,3 +1,5 @@
+import moment from 'moment'
+
 let modal =
     `create table if not exists articleType(
      id INT NOT NULL AUTO_INCREMENT,
@@ -11,7 +13,7 @@ let modal =
 createTable(modal)
 
 let create = value => {
-  let _sql = `insert into articleType set article_id=?,type=?,create_time=${Date.now()};`
+  let _sql = `insert into articleType set article_id=?,type=?,create_time=${moment().valueOf()};`
   return query( _sql, value )
 }
 

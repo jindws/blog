@@ -16,12 +16,12 @@ DBF.create('Article', {
         method    : 'POST',
     },
     Detail:{
-        url       : '/api/article/detail',
-        method    : 'POST',
+        url       : '/api/article/detail/:id',
+        method    : 'GET',
     },
     Remove:{
         url       : '/api/article/remove',
-        method    : 'POST',
+        method    : 'DELETE',
     },
     MyList:{
         url       : '/api/article/mylist',

@@ -1,3 +1,5 @@
+import moment from 'moment'
+
 const modal =
     `create table if not exists article(
      id INT NOT NULL AUTO_INCREMENT,
@@ -14,7 +16,7 @@ createTable(modal)
 
 // 发表文章
 const create = value => {
-  const _sql = `insert into article set title=?,content=?,type=?,create_user_id=?,create_time=${Date.now()};`
+  const _sql = `insert into article set title=?,content=?,type=?,create_user_id=?,create_time=${moment().valueOf()};`
   return query( _sql, value )
 }
 

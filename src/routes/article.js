@@ -60,11 +60,11 @@ router.post("/mylist", Article.MyList);
 
 /**
  * @desc 文章删除
- * @post /api/article/remove
+ * @delete /api/article/remove
  * @param {
         id:String,
     }
  */
-router.post("/remove", checkLogin,ifarticleauthor,Article.Remove);
+router.delete("/remove", checkLogin,ifarticleauthor,Article.Remove);
 
 module.exports = router;
