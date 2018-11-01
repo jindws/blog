@@ -16,8 +16,8 @@ DBF.create('Article', {
         method    : 'POST',
     },
     Detail:{
-        url       : '/api/article/detail/:id',
-        method    : 'GET',
+        url       : '/api/article/detail',
+        method    : 'post',
     },
     Remove:{
         url       : '/api/article/remove',

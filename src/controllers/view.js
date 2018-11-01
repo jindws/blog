@@ -6,7 +6,6 @@ const template = require('../template')
 
 const Index = async ctx => {
     const context = {}
-
     let body = renderToString(
         <StaticRouter
             location={ctx.request.url}

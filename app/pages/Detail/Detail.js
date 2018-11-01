@@ -21,8 +21,6 @@ const _onload = action((data)=>Object.assign(_data,data))
 @observer
 class Detail extends Component {
 
-    id;
-
     constructor(props){
         super(props)
         this.id = props.match.params.id
