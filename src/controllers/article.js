@@ -36,10 +36,9 @@ const CType = async (type,article_id)=>{
 }
 
 const Detail = async ctx=>{
-    let {body} = ctx.request
     const {
         id
-    } = body
+    } = ctx.params
     if(!id){
         ctx.body = getResponse(false,'e001')
         return

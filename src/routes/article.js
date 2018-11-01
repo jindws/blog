@@ -35,7 +35,7 @@ router.post("/update", checkLogin,ifarticleauthor,Article.Update);
  * @post /api/article/detail
  * @param id:String
  */
-router.post("/detail", Article.Detail);
+router.get("/detail/:id", Article.Detail);
 
 /**
  * @desc 文章列表

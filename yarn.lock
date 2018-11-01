@@ -2153,9 +2153,9 @@ date-now@^0.1.4:
   version "0.1.4"
   resolved "https://registry.npmjs.org/date-now/-/date-now-0.1.4.tgz#eaf439fd4d4848ad74e5cc7dbef200672b9e345b"
 
-dbfac@^1.4.1:
-  version "1.4.1"
-  resolved "https://registry.npmjs.org/dbfac/-/dbfac-1.4.1.tgz#c01e3aaaaa77ad7631efe2be0b5d1770efa42104"
+dbfac@^1.4.2:
+  version "1.4.2"
+  resolved "https://registry.npmjs.org/dbfac/-/dbfac-1.4.2.tgz#c53a5c6b3da6583e96492e407d1a8c865917fbd5"
   dependencies:
     object-param "^1.0.2"
     whatwg-fetch "^2.0.4"
