@@ -42,7 +42,7 @@
     "@babel/preset-react": "^7.0.0",
     "@babel/register": "^7.0.0",
     "@babel/runtime": "^7.0.0",
-    "antd": "^3.10.0",
+    "antd": "^3.10.4",
     "autoprefixer": "^9.1.5",
     "babel-loader": "^8.0.2",
     "babel-plugin-import": "^1.9.1",
